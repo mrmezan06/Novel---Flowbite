@@ -6,7 +6,7 @@ const Layout = () => {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col items-center justify-center max-w-[100vw]">
+      <div className="flex flex-col items-center justify-center max-w-[100vw] bg-white">
         <Outlet />
       </div>
       <Footer />
