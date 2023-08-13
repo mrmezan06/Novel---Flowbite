@@ -139,6 +139,23 @@ const optionList = [
   'Full-Screen',
 ];
 
+
+const novelObject = {
+  id: 1,
+  name: 'Battle Through the Heavens',
+  category: 'Action',
+  lastReleased: 'Chapter 100',
+  totalChapter: '1000',
+  updatedAt: '2021-08-01',
+  coverUrl: 'https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg',
+  author: 'Heavenly Silkworm Potato, Tian Can Tu Dou, 天蚕土豆',
+  alternativeName:
+    'BTTH, Dou Po Cang Qiong, Đấu Phá Thương Khung, Fights Break Sphere, Panlong, 斗破苍穹',
+  status: 'Ongoing',
+  description:
+    'In a land where no magic is present. A land where the strong make the rules and the weak have to obey. A land filled with alluring treasures and beauty, yet also filled with unforeseen danger. Three years ago, Xiao Yan, who had shown talents none had seen in decades, suddenly lost everything. His powers, his reputation, and his promise to his mother. What sorcery has caused him to lose all of his powers? And why has his fiancee suddenly shown up?',
+};
+
 const feature =
   'https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg';
 const imagesUrl = [
@@ -165,6 +182,21 @@ const chapterList = [
   'Chapter 8',
 ];
 
+const chapterwithName = [
+  'Chapter 1 – Genius No More',
+  'Chapter 2 – Dou Qi Continent',
+  'Chapter 3 – Guests',
+  'Chapter 4 – Faction of the Misty Clouds',
+  'Chapter 5 – Qi Gathering Powder',
+  'Chapter 6 – Alchemists',
+  'Chapter 7 – Divorce!',
+  'Chapter 8 – The Mysterious Elder',
+  'Chapter 9 – Yao Lao',
+  'Chapter 10 – Borrowing Money',
+  'Chapter 11 – The Market',
+  'Chapter 12 – Stay Away from Him',
+];
+
 module.exports = {
   genreList,
   novelList,
@@ -174,4 +206,6 @@ module.exports = {
   feature,
   imagesUrl,
   chapterList,
+  novelObject,
+  chapterwithName,
 };

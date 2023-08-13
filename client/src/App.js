@@ -6,6 +6,7 @@ import CreateNovel from './page/CreateNovel';
 import AddChapter from './page/AddChapter';
 import Login from './page/Login';
 import Register from './page/Register';
+import Novel from './page/Novel';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/novel" element={<Novel />} />
           <Route path="/chapter" element={<Chapter />} />
           <Route path="/create/novel" element={<CreateNovel />} />
           <Route path="/add/chapter" element={<AddChapter />} />
