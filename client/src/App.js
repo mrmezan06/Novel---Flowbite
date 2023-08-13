@@ -7,6 +7,7 @@ import AddChapter from './page/AddChapter';
 import Login from './page/Login';
 import Register from './page/Register';
 import Novel from './page/Novel';
+import NotFound from './page/NotFound';
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
           <Route path="/add/chapter" element={<AddChapter />} />
           <Route path="/admin/login" element={<Login />} />
           <Route path="/admin/register" element={<Register />} />
+          {/* Not Found Page */}
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </>
