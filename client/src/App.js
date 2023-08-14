@@ -14,7 +14,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from './page/Dashboard';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getNovels } from './action/novelAction';
+import {
+  getHotNovels,
+  getLatestNovels,
+  getNovels,
+  getNovelsCompleted,
+} from './action/novelAction';
+
+import { getAllChapters } from './action/chapterAction';
 
 function App() {
   const { user } = useSelector((state) => state.login);
@@ -23,6 +30,10 @@ function App() {
 
   useEffect(() => {
     dispatch(getNovels());
+    dispatch(getLatestNovels());
+    dispatch(getNovelsCompleted());
+    dispatch(getHotNovels());
+    dispatch(getAllChapters());
   }, [dispatch]);
 
   return (

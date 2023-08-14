@@ -85,3 +85,63 @@ export const getNovels = () => async (dispatch) => {
     });
   }
 };
+
+export const getLatestNovels = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: 'GET_LATEST_NOVELS_REQUEST',
+    });
+
+    const { data } = await axios.get(`${BASE_URL}/api/novel/latest`);
+
+    dispatch({
+      type: 'GET_LATEST_NOVELS_SUCCESS',
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: 'GET_LATEST_NOVELS_FAIL',
+      payload: error,
+    });
+  }
+};
+
+export const getNovelsCompleted = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: 'GET_NOVELS_COMPLETED_REQUEST',
+    });
+
+    const { data } = await axios.get(`${BASE_URL}/api/novel/completed`);
+
+    dispatch({
+      type: 'GET_NOVELS_COMPLETED_SUCCESS',
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: 'GET_NOVELS_COMPLETED_FAIL',
+      payload: error,
+    });
+  }
+};
+
+export const getHotNovels = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: 'GET_HOT_NOVELS_REQUEST',
+    });
+
+    const { data } = await axios.get(`${BASE_URL}/api/novel/hot`);
+
+    dispatch({
+      type: 'GET_HOT_NOVELS_SUCCESS',
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: 'GET_HOT_NOVELS_FAIL',
+      payload: error,
+    });
+  }
+};

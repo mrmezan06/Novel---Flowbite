@@ -79,6 +79,28 @@ const getAllNovels = async (req, res) => {
     });
   }
 };
+// @desc    Get all latest novels
+// @route   GET /api/novel
+// @access  Public
+const getLatestNovels = async (req, res) => {
+  const novels = await Novel.find({}).sort({ updatedAt: -1 }).limit(10);
+
+  const count = await Novel.countDocuments();
+
+  if (novels) {
+    return res.status(200).json({
+      success: true,
+      message: 'Get all novels successfully',
+      total: count,
+      novels,
+    });
+  } else {
+    return res.status(500).json({
+      success: false,
+      message: 'Internal server error!',
+    });
+  }
+};
 
 // @desc    Get a novel by id
 // @route   GET /api/novel/:id
@@ -173,10 +195,53 @@ const deleteNovelById = async (req, res) => {
   }
 };
 
+const getNovelsCompleted = async (req, res) => {
+  const novels = await Novel.find({ status: "Completed" });
+
+  const count = await Novel.countDocuments();
+
+  if (novels) {
+    return res.status(200).json({
+      success: true,
+      message: 'Get all novels successfully',
+      total: count,
+      novels,
+    });
+  } else {
+    return res.status(500).json({
+      success: false,
+      message: 'No completed novel!',
+    });
+  }
+};
+
+const getHotNovels = async (req, res) => {
+  const novels = await Novel.find({hotNovel: true}).sort({ updatedAt: -1 }).limit(10);
+
+  const count = await Novel.countDocuments();
+
+  if (novels) {
+    return res.status(200).json({
+      success: true,
+      message: 'Get all novels successfully',
+      total: count,
+      novels,
+    });
+  } else {
+    return res.status(500).json({
+      success: false,
+      message: 'No hot novel found!',
+    });
+  }
+};
+
 module.exports = {
   createNovel,
   getAllNovels,
+  getLatestNovels,
   getNovelById,
   updateNovelById,
   deleteNovelById,
+  getNovelsCompleted,
+  getHotNovels,
 };

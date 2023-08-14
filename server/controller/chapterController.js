@@ -21,13 +21,11 @@ const createChapter = async (req, res) => {
         .json({ success: false, message: 'Please fill all required fields!' });
     }
 
-    const contentArray = content.split('\n');
-
     const newChapter = new Chapter({
       novelId,
       chapter,
       title,
-      content: contentArray,
+      content,
     });
 
     await newChapter.save();
@@ -125,19 +123,12 @@ const deleteChapterById = async (req, res) => {
 const updateChapterById = async (req, res) => {
   try {
     const { chapterId } = req.params;
-    const { chapter, title, content } = req.body;
 
     const chapterToUpdate = await Chapter.findById(chapterId);
     if (!chapterToUpdate) {
       return res
         .status(404)
         .json({ success: false, message: 'Chapter not found!' });
-    }
-
-    if (!chapter || !title || !content) {
-      return res
-        .status(400)
-        .json({ success: false, message: 'Please fill all required fields!' });
     }
 
     const updatedChapter = await Chapter.findByIdAndUpdate(
@@ -156,10 +147,24 @@ const updateChapterById = async (req, res) => {
   }
 };
 
+const getAllChapter = async (req, res) => {
+  try {
+    const chapters = await Chapter.find({})
+      .select('-content')
+      .sort({ createdAt: -1 })
+      .populate('novelId', 'name');
+    const totalChapter = chapters.length;
+    return res.status(200).json({ success: true, chapters, totalChapter });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createChapter,
   getAllChaptersByNovelId,
   getChapterById,
   deleteChapterById,
   updateChapterById,
+  getAllChapter,
 };

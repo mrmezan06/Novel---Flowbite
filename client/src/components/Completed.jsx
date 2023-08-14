@@ -1,8 +1,10 @@
 import React from 'react';
-import TablePagination from './TablePagination';
-import { novelObjectlList } from '../utility/itemList';
+import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 const Completed = () => {
+  const { novels } = useSelector((state) => state.completed);
+
   return (
     <>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -21,27 +23,27 @@ const Completed = () => {
               <th scope="col" className="px-6 py-3">
                 Updated At
               </th>
-              {/* <th scope="col" className="px-6 py-3">
-                <span className="sr-only">Action</span>
-              </th> */}
             </tr>
           </thead>
           <tbody>
-            {novelObjectlList.map((novel) => (
-              <tr
-                key={novel.id}
-                className="bg-white border-b cursor-pointer dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-              >
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            {novels &&
+              novels.map((novel) => (
+                <tr
+                  key={novel.id}
+                  className="bg-white border-b cursor-pointer dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                 >
-                  {novel.name}
-                </th>
-                <td className="px-6 py-4">{novel.category}</td>
-                <td className="px-6 py-4">{novel.totalChapter}</td>
-                <td className="px-6 py-4">{novel.updatedAt}</td>
-                {/* <td className="px-6 py-4 text-right">
+                  <th
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    {novel.name}
+                  </th>
+                  <td className="px-6 py-4">{novel.category.join(', ')}</td>
+                  <td className="px-6 py-4">{novel.totalChapter}</td>
+                  <td className="px-6 py-4">
+                    {moment(novel.updatedAt).format('DD-MM-YY HH:mm A')}
+                  </td>
+                  {/* <td className="px-6 py-4 text-right">
                   <a
                     href="#!"
                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
@@ -49,11 +51,15 @@ const Completed = () => {
                     Read
                   </a>
                 </td> */}
-              </tr>
-            ))}
+                </tr>
+              ))}
           </tbody>
         </table>
-        <TablePagination />
+        {novels?.length === 0 && (
+          <div className="bg-white border-b text-center cursor-pointer dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <h1 className="text-2xl py-5">No completed novel right now!</h1>
+          </div>
+        )}
       </div>
     </>
   );

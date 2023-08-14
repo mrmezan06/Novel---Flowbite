@@ -7,13 +7,27 @@ const {
   getNovelReducer,
   getNovelsReducer,
   createNovelReducer,
+  getLatestNovelsReducer,
+  getNovelsCompletedReducer,
+  getHotNovelsReducer,
 } = require('./reducer/novelReducer');
+const {
+  getChapterReducer,
+  getChaptersReducer,
+  getAllChapterReducer,
+} = require('./reducer/chapterReducer');
 
 const reducer = combineReducers({
   login: loginReducer,
   novel: getNovelReducer,
   novels: getNovelsReducer,
   novelCreate: createNovelReducer,
+  latest: getLatestNovelsReducer,
+  completed: getNovelsCompletedReducer,
+  hot: getHotNovelsReducer,
+  chapter: getChapterReducer,
+  chapters: getChaptersReducer,
+  allChapters: getAllChapterReducer,
 });
 
 const user = localStorage.getItem('user')

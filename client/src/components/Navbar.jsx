@@ -1,7 +1,13 @@
 import { AiOutlineBars } from 'react-icons/ai';
+import { CgProfile } from 'react-icons/cg';
 import { menuList, genreList, optionList } from '../utility/itemList';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+  const { user } = useSelector((state) => state.login);
+  const navigate = useNavigate();
+
   return (
     <>
       <nav className="bg-gray-700 border-gray-200 dark:bg-gray-900">
@@ -258,6 +264,17 @@ const Navbar = () => {
                   </ul>
                 </div>
               </li>
+              {user && (
+                <li>
+                  <button
+                    onClick={() => navigate('/dashboard', { replace: true })}
+                    className="flex items-center justify-between w-full py-2 pl-3 pr-4 bg-gray-700  text-white border-b border-gray-100 hover:bg-gray-500 hover:text-gray-500 md:hover:bg-transparent md:border-0 md:hover:text-white-700 md:p-0 md:w-auto dark:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                  >
+                    <CgProfile className="w-5 h-5 mr-2" />
+                    Profile
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
         </div>

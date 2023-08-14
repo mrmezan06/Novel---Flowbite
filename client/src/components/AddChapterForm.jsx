@@ -1,7 +1,60 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getNovel } from '../action/novelAction';
+
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import { BASE_URL } from '../constant/baseUrl';
+
 const AddChapterForm = ({ novels }) => {
-  const [novel, setNovel] = useState('');
+  const [novelName, setNovelName] = useState('');
+  const [novelId, setNovelId] = useState('');
   const [chapter, setChapter] = useState(0);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+
+  const { novel } = useSelector((state) => state.novel);
+  const { user } = useSelector((state) => state.login);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (novel) {
+      setChapter(novel.totalChapter + 1);
+      setNovelName(novel.name);
+      setNovelId(novel._id);
+    }
+  }, [novel]);
+
+  const handleAddChapter = async (e) => {
+    e.preventDefault();
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: user?.accessToken,
+      },
+    };
+
+    const contentArray = content.split('<>');
+
+    console.log(contentArray);
+
+    await axios
+      .post(
+        `${BASE_URL}/api/chapter`,
+        { novelId, title, content: contentArray, chapter },
+        config
+      )
+      .then((res) => {
+        dispatch(getNovel(novelId));
+        setTitle('');
+        setContent('');
+        toast.success('Chapter added successfully');
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+  };
 
   return (
     <>
@@ -10,7 +63,7 @@ const AddChapterForm = ({ novels }) => {
           <h2 className="mb-4 text-xl text-center font-bold text-gray-900 dark:text-white">
             Add chapter
           </h2>
-          <form action="#">
+          <form onSubmit={handleAddChapter}>
             <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
               <div className="sm:col-span-2">
                 <label
@@ -25,8 +78,8 @@ const AddChapterForm = ({ novels }) => {
                   id="name"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Type chapter name"
-                  value={chapter === 0 ? '' : `Chapter ${chapter}`}
-                  disabled
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                 />
               </div>
               <div className="sm:col-span-2">
@@ -40,7 +93,7 @@ const AddChapterForm = ({ novels }) => {
                   type="text"
                   name="novel"
                   id="novel"
-                  value={novel}
+                  value={novelName}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Choose from below list"
                   disabled
@@ -58,7 +111,9 @@ const AddChapterForm = ({ novels }) => {
                   id="category"
                   onChange={(e) => {
                     // check the category already exist or not
-                    setNovel(e.target.value);
+
+                    dispatch(getNovel(e.target.value));
+                    setNovelId(e.target.value);
                   }}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 >
@@ -77,15 +132,15 @@ const AddChapterForm = ({ novels }) => {
               </div>
               <div className="w-full">
                 <label
-                  htmlFor="totalChapter"
+                  htmlFor="chapterNumber"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Chapter Number
                 </label>
                 <input
                   type="number"
-                  name="totalChapter"
-                  id="totalChapter"
+                  name="chapterNumber"
+                  id="chapterNumber"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Type chapter number"
                   value={chapter === 0 ? '' : chapter}
@@ -93,6 +148,7 @@ const AddChapterForm = ({ novels }) => {
                   onChange={(e) => {
                     setChapter(Number(e.target.value));
                   }}
+                  disabled
                 />
               </div>
               <div className="sm:col-span-2">
@@ -100,7 +156,7 @@ const AddChapterForm = ({ novels }) => {
                   htmlFor="chapterContent"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Chapter Content
+                  Chapter Content (Paragraphs are separated by <b>&lt;&gt;</b>)
                 </label>
                 <textarea
                   id="chapterContent"
@@ -108,6 +164,8 @@ const AddChapterForm = ({ novels }) => {
                   rows="6"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Type chapter content"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
                   required
                 ></textarea>
               </div>
