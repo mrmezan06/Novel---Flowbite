@@ -12,10 +12,19 @@ import NotFound from './page/NotFound';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from './page/Dashboard';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getNovels } from './action/novelAction';
 
 function App() {
   const { user } = useSelector((state) => state.login);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getNovels());
+  }, [dispatch]);
+
   return (
     <>
       <Routes>
