@@ -87,7 +87,94 @@ const getChapterById = async (req, res) => {
 
     const novel = await Novel.findById(chapter.novelId);
 
-    return res.status(200).json({ success: true, chapter, novel });
+    if (!novel) {
+      return res
+        .status(404)
+        .json({ success: false, message: 'Novel not found!' });
+    }
+
+    const currentChapter = chapter.chapter;
+
+    const totalChapter = novel.totalChapter;
+
+    let prevChapter = null;
+    let chapterList = null;
+    let nextChapter = null;
+
+    if (currentChapter === totalChapter) {
+      // if current chapter is the last chapter
+
+      prevChapter = await Chapter.findOne({
+        novelId: novel._id,
+        chapter: currentChapter - 1,
+      });
+      // get the previous 10 chapter
+
+      if (totalChapter < 10) {
+        chapterList = await Chapter.find({
+          novelId: novel._id,
+          chapter: { $gte: 1, $lte: totalChapter },
+        }).sort({ chapter: 1 });
+      } else {
+        chapterList = await Chapter.find({
+          novelId: novel._id,
+          chapter: { $gte: currentChapter - 10, $lte: currentChapter },
+        }).sort({ chapter: 1 });
+      }
+    } else if (currentChapter === 1) {
+      // if current chapter is the first chapter
+
+      nextChapter = await Chapter.findOne({
+        novelId: novel._id,
+        chapter: currentChapter + 1,
+      });
+      // get the next 10 chapter
+
+      if (totalChapter < 10) {
+        chapterList = await Chapter.find({
+          novelId: novel._id,
+          chapter: { $gte: 1, $lte: totalChapter },
+        }).sort({ chapter: 1 });
+      } else {
+        chapterList = await Chapter.find({
+          novelId: novel._id,
+          chapter: { $gte: currentChapter, $lte: currentChapter + 10 },
+        }).sort({ chapter: 1 });
+      }
+    } else {
+      // if current chapter is in the middle
+
+      prevChapter = await Chapter.findOne({
+        novelId: novel._id,
+        chapter: currentChapter - 1,
+      });
+      nextChapter = await Chapter.findOne({
+        novelId: novel._id,
+        chapter: currentChapter + 1,
+      });
+
+      // get the previous 5 chapter and next 5 chapter
+      if (totalChapter < 10) {
+        chapterList = await Chapter.find({
+          novelId: novel._id,
+          chapter: { $gte: 1, $lte: totalChapter },
+        }).sort({ chapter: 1 });
+      } else {
+        chapterList = await Chapter.find({
+          novelId: novel._id,
+          chapter: { $gte: currentChapter - 5, $lte: currentChapter + 5 },
+        }).sort({ chapter: 1 });
+      }
+    }
+
+    return res.status(200).json({
+      success: true,
+      chapter,
+      novel,
+      prevChapter,
+      nextChapter,
+      chapterList,
+    });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

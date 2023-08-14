@@ -107,7 +107,10 @@ const NovelList = () => {
                 Hot Novel
               </th>
               <th scope="col" className="px-6 py-3">
-                Actions
+                O/C
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Delete
               </th>
             </tr>
           </thead>
@@ -167,6 +170,15 @@ const NovelList = () => {
                         Make Ongoing
                       </span>
                     )}
+                  </td>
+                  <td className="px-6 py-4">
+                    <span
+                      className="bg-red-700 text-white py-2 px-3"
+                      onClick={() => {}}
+                      disabled={loading}
+                    >
+                      Delete
+                    </span>
                   </td>
                 </tr>
               ))}

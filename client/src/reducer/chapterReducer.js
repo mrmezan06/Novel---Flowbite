@@ -29,7 +29,11 @@ export const getChapterReducer = (state = {}, action) => {
     case 'GET_CHAPTER_SUCCESS':
       return {
         loading: false,
-        chapter: action.payload,
+        chapter: action.payload.chapter,
+        novel: action.payload.novel,
+        prevChapter: action.payload.prevChapter,
+        nextChapter: action.payload.nextChapter,
+        chapterList: action.payload.chapterList,
       };
     case 'GET_CHAPTER_FAIL':
       return {

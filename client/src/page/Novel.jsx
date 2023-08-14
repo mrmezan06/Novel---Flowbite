@@ -40,7 +40,7 @@ const Novel = () => {
             <div className="flex flex-col p-5 lg:flex-row md:flex-col justify-between">
               {/* Left side Novel Info and Cover */}
               <div className="flex flex-col justify-between">
-                <div className="mt-5 w-[100%] lg:w-[50%] md:w-[100%] sm:w-[100%]">
+                <div className="mt-5 w-[100%] lg:w-[80%] md:w-[100%] sm:w-[100%]">
                   <img
                     className="h-[400px] w-[100%]"
                     src={novel.coverUrl}
@@ -92,6 +92,7 @@ const Novel = () => {
                       <p
                         key={chapter._id}
                         className="text-justify text-xl font-medium cursor-pointer"
+                        onClick={() => navigate(`/chapter?id=${chapter._id}`)}
                       >
                         {i + 1}. Chapter - {chapter.chapter}
                       </p>
@@ -130,6 +131,7 @@ const Novel = () => {
                   <tr
                     key={chapter._id}
                     className="bg-white border-b cursor-pointer dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                    onClick={() => navigate(`/chapter?id=${chapter._id}`)}
                   >
                     <th
                       scope="row"
