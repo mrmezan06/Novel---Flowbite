@@ -28,7 +28,9 @@ export const getNovelReducer = (state = {}, action) => {
     case 'GET_NOVEL_SUCCESS':
       return {
         loading: false,
-        novel: action.payload,
+        novel: action.payload.novel,
+        chapters: action.payload.chapters,
+        latestChapters: action.payload.latestChapters,
       };
     case 'GET_NOVEL_FAIL':
       return {

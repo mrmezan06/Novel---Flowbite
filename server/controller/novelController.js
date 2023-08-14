@@ -109,11 +109,23 @@ const getNovelById = async (req, res) => {
   try {
     const novel = await Novel.findById(req.params.id);
 
+    const chapters = await Chapter.find({ novelId: req.params.id }).select(
+      '-content'
+    );
+    const latestChapters = await Chapter.find({ novelId: req.params.id })
+      .sort({ updatedAt: -1 })
+      .select('-content')
+      .limit(5);
+
+    console.log(chapters);
+    console.log(latestChapters);
     if (novel) {
       return res.status(200).json({
         success: true,
         message: 'Get novel successfully',
         novel,
+        chapters,
+        latestChapters,
       });
     } else {
       return res.status(500).json({

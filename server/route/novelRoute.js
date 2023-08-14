@@ -18,7 +18,7 @@ router.get('/', getAllNovels);
 router.get('/completed', getNovelsCompleted);
 router.get('/hot', getHotNovels);
 router.get('/latest', getLatestNovels);
-router.get('/novel/:id', getNovelById);
+router.get('/get/:id', getNovelById);
 router.put('/:id', checkAuth, checkRole('ADMIN'), updateNovelById);
 router.delete('/:id', checkAuth, checkRole('ADMIN'), deleteNovelById);
 

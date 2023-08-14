@@ -50,13 +50,11 @@ export const getNovel = (novelId) => async (dispatch) => {
       type: 'GET_NOVEL_REQUEST',
     });
 
-    const { data } = await axios.get(`${BASE_URL}/api/novel/${novelId}`);
-
-    const novel = data?.novel;
+    const { data } = await axios.get(`${BASE_URL}/api/novel/get/${novelId}`);
 
     dispatch({
       type: 'GET_NOVEL_SUCCESS',
-      payload: novel,
+      payload: data,
     });
   } catch (error) {
     dispatch({

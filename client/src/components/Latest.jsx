@@ -1,7 +1,9 @@
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 const Latest = () => {
   const { novels } = useSelector((state) => state.latest);
+  const navigate = useNavigate();
   return (
     <>
       <div className="relative overflow-x-auto mb-5 shadow-md sm:rounded-lg">
@@ -31,6 +33,7 @@ const Latest = () => {
                 <tr
                   key={novel._id}
                   className="bg-white border-b cursor-pointer dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                  onClick={() => navigate(`/novel?id=${novel._id}`)}
                 >
                   <th
                     scope="row"

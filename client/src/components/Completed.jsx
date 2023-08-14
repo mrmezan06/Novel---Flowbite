@@ -1,9 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 
 const Completed = () => {
   const { novels } = useSelector((state) => state.completed);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -29,8 +31,9 @@ const Completed = () => {
             {novels &&
               novels.map((novel) => (
                 <tr
-                  key={novel.id}
+                  key={novel._id}
                   className="bg-white border-b cursor-pointer dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                  onClick={() => navigate(`/novel?id=${novel._id}`)}
                 >
                   <th
                     scope="row"
