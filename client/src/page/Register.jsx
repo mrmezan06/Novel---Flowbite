@@ -99,17 +99,20 @@ const Register = () => {
               >
                 Register
               </button>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  console.log('Go to Login Page');
-                }}
-                className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-gray-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
-              >
-                Login
-              </button>
             </div>
           </form>
+          {/* Already have an account? Registe */}
+          <div className="flex flex-row items-center justify-center mt-5">
+            <p className="px-5 py-2.5 text-sm text-gray-900 dark:text-white">
+              Already have an account?{' '}
+            </p>
+            <a
+              href="/admin/login"
+              className=" px-5 py-2.5 text-sm font-medium text-center text-black "
+            >
+              Login
+            </a>
+          </div>
         </div>
       </section>
     </>

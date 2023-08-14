@@ -3,6 +3,9 @@ const colors = require('colors');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
+
+const cors = require('cors');
+
 dotenv.config();
 const connectDB = require('./config/DB');
 
@@ -29,6 +32,14 @@ app.get('/', (req, res) => {
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
+
+// Cors
+
+app.use(
+  cors({
+    origin: '*',
+  })
+);
 
 // Routes
 app.use('/api/user', userRoute);

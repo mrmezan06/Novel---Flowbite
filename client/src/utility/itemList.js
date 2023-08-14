@@ -182,6 +182,49 @@ const chapterList = [
   'Chapter 8',
 ];
 
+const chapterObject = [
+  {
+    id: 1,
+    chapter: 1,
+    title: 'Genius No More',
+    novel: 'Battle Through the Heavens',
+    status: 'Draft',
+    createdAt: '2021-08-01',
+  },
+  {
+    id: 2,
+    chapter: 2,
+    title: 'Dou Qi Continent',
+    novel: 'Battle Through the Heavens',
+    status: 'Draft',
+    createdAt: '2021-08-01',
+  },
+  {
+    id: 3,
+    chapter: 3,
+    title: 'Guests',
+    novel: 'Battle Through the Heavens',
+    status: 'Draft',
+    createdAt: '2021-08-01',
+  },
+  {
+    id: 4,
+    chapter: 4,
+    title: 'Faction of the Misty Clouds',
+    novel: 'Battle Through the Heavens',
+    status: 'Draft',
+    createdAt: '2021-08-01',
+  },
+  {
+    id: 5,
+    chapter: 5,
+    title: 'Qi Gathering Powder',
+    novel: 'Battle Through the Heavens',
+    status: 'Draft',
+    createdAt: '2021-08-01',
+  },
+];
+
 const chapterwithName = [
   'Chapter 1 – Genius No More',
   'Chapter 2 – Dou Qi Continent',
@@ -208,4 +251,5 @@ module.exports = {
   chapterList,
   novelObject,
   chapterwithName,
+  chapterObject,
 };

@@ -2,9 +2,9 @@ const jwt = require('jsonwebtoken');
 
 const checkAuth = (req, res, next) => {
   try {
-    const token = req.cookies.token;
-
-    console.log(req.cookies.token);
+    // Get token from header
+    const token = req.headers.authorization || req.headers.Authorization;
+    // console.log(token);
 
     if (token) {
       const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
