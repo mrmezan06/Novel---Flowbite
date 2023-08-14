@@ -117,8 +117,7 @@ const getNovelById = async (req, res) => {
       .select('-content')
       .limit(5);
 
-    console.log(chapters);
-    console.log(latestChapters);
+
     if (novel) {
       return res.status(200).json({
         success: true,
