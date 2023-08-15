@@ -122,6 +122,7 @@ const NovelList = ({ loading, error, novels, totalNovel, pagination }) => {
               novels.map((novel) => (
                 <tr
                   key={novel._id}
+                  onClick={() => navigate(`/novel?id=${novel._id}`)}
                   className="bg-white border-b cursor-pointer dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                 >
                   <th
