@@ -111,9 +111,7 @@ const ChapterList = () => {
                   </td>
                   <td
                     className="px-6 py-4"
-                    onClick={() =>
-                      navigate(`/novel?id=${chapter.novelId?._id}`)
-                    }
+                    onClick={() => navigate(`/novel/${chapter.novelId?._id}`)}
                   >
                     {chapter.novelId?.name}
                   </td>

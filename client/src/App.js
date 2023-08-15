@@ -65,7 +65,7 @@ function App() {
             path="/chapter/update/:id"
             element={user ? <UpdateChapter /> : <Login />}
           />
-          <Route path="/novel" element={<Novel />} />
+          <Route path="/novel/:id" element={<Novel />} />
           <Route path="/search" element={<Search />} />
           <Route path="/genre" element={<CategoryPage />} />
           <Route path="/chapter" element={<Chapter />} />

@@ -13,7 +13,7 @@ const Gallery = () => {
       <div className="flex flex-col gap-2 mt-5 mb-5 w-[100%] lg:flex-row lg:mt-10 lg:mb-10 lg:gap-4 sm:flex-col md:flex-col">
         <div
           className="w-[100%] lg:w-[40%] md:w-[100%] sm:w-[100%] cursor-pointer"
-          onClick={() => navigate(`/novel?id=${featureArray[0]?._id}`)}
+          onClick={() => navigate(`/novel/${featureArray[0]?._id}`)}
         >
           {novels && featureArray.length !== 0 && (
             <img
@@ -30,7 +30,7 @@ const Gallery = () => {
               <div
                 key={i}
                 className="w-max-full cursor-pointer"
-                onClick={() => navigate(`/novel?id=${other._id}`)}
+                onClick={() => navigate(`/novel/${other._id}`)}
               >
                 <img
                   className="h-[235px] w-[200px] xsm:w-[300px] xmd:w-[200px] sm:w-[180px] md:w-[180px] lg:w-[130px] xl:w-[160px] 2xl:w-[180px]"

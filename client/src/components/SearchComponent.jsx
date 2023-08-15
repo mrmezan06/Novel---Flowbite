@@ -46,7 +46,7 @@ const SearchComponent = () => {
                 <tr
                   key={novel._id}
                   className="bg-white border-b cursor-pointer dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                  onClick={() => navigate(`/novel?id=${novel._id}`)}
+                  onClick={() => navigate(`/novel/${novel._id}`)}
                 >
                   <th
                     scope="row"

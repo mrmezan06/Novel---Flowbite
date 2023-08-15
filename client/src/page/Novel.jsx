@@ -7,7 +7,8 @@ import SingleNovelChapterPagination from '../components/SingleNovelChapterPagina
 
 const Novel = () => {
   const location = useLocation();
-  const id = location.search.split('=')[1];
+  const id = location.pathname.split('/')[2];
+  const page = location.search.split('=')[1] || 1;
   const navigate = useNavigate();
 
   const { novel, chapters, latestChapters, total, pagination } = useSelector(
@@ -17,14 +18,8 @@ const Novel = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!id) {
-      navigate('/', { replace: true });
-    }
-
-    if (id && chapters?.length === 0) {
-      dispatch(getNovel(id));
-    }
-  }, [id, navigate, dispatch, chapters]);
+    dispatch(getNovel(id, page));
+  }, [dispatch, id, page]);
 
   return (
     <>

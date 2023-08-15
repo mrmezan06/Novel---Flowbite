@@ -127,31 +127,31 @@ const NovelList = ({ loading, error, novels, totalNovel, pagination }) => {
                   <th
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                    onClick={() => navigate(`/novel?id=${novel._id}`)}
+                    onClick={() => navigate(`/novel/${novel._id}`)}
                   >
                     {novel.name}
                   </th>
                   <td
                     className="px-5 py-3"
-                    onClick={() => navigate(`/novel?id=${novel._id}`)}
+                    onClick={() => navigate(`/novel/${novel._id}`)}
                   >
                     {novel?.category?.join(', ')}
                   </td>
                   <td
                     className="px-5 py-3"
-                    onClick={() => navigate(`/novel?id=${novel._id}`)}
+                    onClick={() => navigate(`/novel/${novel._id}`)}
                   >
                     {novel?.lastReleased}
                   </td>
                   <td
                     className="px-5 py-3"
-                    onClick={() => navigate(`/novel?id=${novel._id}`)}
+                    onClick={() => navigate(`/novel/${novel._id}`)}
                   >
                     {novel?.totalChapter}
                   </td>
                   <td
                     className="px-5 py-3"
-                    onClick={() => navigate(`/novel?id=${novel._id}`)}
+                    onClick={() => navigate(`/novel/${novel._id}`)}
                   >
                     {novel?.status}
                   </td>

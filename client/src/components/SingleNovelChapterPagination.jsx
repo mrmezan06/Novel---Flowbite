@@ -1,25 +1,32 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { getNovel } from '../action/novelAction';
+// import { useDispatch } from 'react-redux';
+// import { getNovel } from '../action/novelAction';
+import { useNavigate } from 'react-router-dom';
+
 
 const SingleNovelChapterPagination = ({ total, pagination, novelId }) => {
   const { startPage, endPage, page, pages } = pagination;
   const [currentPage, setCurrentPage] = useState(page);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const handlePageChange = (changePage) => {
+  const navigate = useNavigate();
+
+  const handlePageChange = (e, changePage) => {
+    e.preventDefault();
     if (changePage < 1) {
       setCurrentPage(1);
-      dispatch(getNovel(novelId, 1));
+      navigate(`/novel/${novelId}?page=1`);
     }
     if (changePage > pages) {
       setCurrentPage(pages);
-      dispatch(getNovel(novelId, pages));
+      // dispatch(getNovel(novelId, pages));
+      navigate(`/novel/${novelId}?page=${pages}`);
     }
     if (changePage > 0 && changePage <= pages) {
       setCurrentPage(changePage);
-      dispatch(getNovel(novelId, changePage));
+      // dispatch(getNovel(novelId, changePage));
+      navigate(`/novel/${novelId}?page=${changePage}`);
     }
   };
 
@@ -49,7 +56,7 @@ const SingleNovelChapterPagination = ({ total, pagination, novelId }) => {
         </span>
         <ul className="inline-flex -space-x-px text-sm h-8">
           <li
-            onClick={() => handlePageChange(currentPage - 1)}
+            onClick={(e) => handlePageChange(e, currentPage - 1)}
             className="cursor-pointer flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             Previous
@@ -57,7 +64,7 @@ const SingleNovelChapterPagination = ({ total, pagination, novelId }) => {
 
           {arrayRange(startPage, endPage, step).map((i) => (
             <li
-              onClick={() => handlePageChange(i)}
+              onClick={(e) => handlePageChange(e, i)}
               key={i}
               className={`
              ${
@@ -72,7 +79,7 @@ const SingleNovelChapterPagination = ({ total, pagination, novelId }) => {
           ))}
 
           <li
-            onClick={() => handlePageChange(currentPage + 1)}
+            onClick={(e) => handlePageChange(e, currentPage + 1)}
             className="cursor-pointer flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             Next
