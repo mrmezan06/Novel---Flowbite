@@ -44,13 +44,15 @@ export const createNovel = (novelData) => async (dispatch) => {
   }
 };
 
-export const getNovel = (novelId) => async (dispatch) => {
+export const getNovel = (novelId, page) => async (dispatch) => {
   try {
     dispatch({
       type: 'GET_NOVEL_REQUEST',
     });
 
-    const { data } = await axios.get(`${BASE_URL}/api/novel/get/${novelId}`);
+    const { data } = await axios.get(
+      `${BASE_URL}/api/novel/get/${novelId}?page=${page ? page : 1}`
+    );
 
     dispatch({
       type: 'GET_NOVEL_SUCCESS',
@@ -64,13 +66,15 @@ export const getNovel = (novelId) => async (dispatch) => {
   }
 };
 
-export const getNovels = () => async (dispatch) => {
+export const getNovels = (page) => async (dispatch) => {
   try {
     dispatch({
       type: 'GET_NOVELS_REQUEST',
     });
 
-    const { data } = await axios.get(`${BASE_URL}/api/novel`);
+    const { data } = await axios.get(
+      `${BASE_URL}/api/novel?page=${page ? page : 1}`
+    );
 
     dispatch({
       type: 'GET_NOVELS_SUCCESS',
@@ -84,13 +88,15 @@ export const getNovels = () => async (dispatch) => {
   }
 };
 
-export const getLatestNovels = () => async (dispatch) => {
+export const getLatestNovels = (page) => async (dispatch) => {
   try {
     dispatch({
       type: 'GET_LATEST_NOVELS_REQUEST',
     });
 
-    const { data } = await axios.get(`${BASE_URL}/api/novel/latest`);
+    const { data } = await axios.get(
+      `${BASE_URL}/api/novel/latest?page=${page ? page : 1}`
+    );
 
     dispatch({
       type: 'GET_LATEST_NOVELS_SUCCESS',
@@ -104,13 +110,15 @@ export const getLatestNovels = () => async (dispatch) => {
   }
 };
 
-export const getNovelsCompleted = () => async (dispatch) => {
+export const getNovelsCompleted = (page) => async (dispatch) => {
   try {
     dispatch({
       type: 'GET_NOVELS_COMPLETED_REQUEST',
     });
 
-    const { data } = await axios.get(`${BASE_URL}/api/novel/completed`);
+    const { data } = await axios.get(
+      `${BASE_URL}/api/novel/completed?page=${page ? page : 1}`
+    );
 
     dispatch({
       type: 'GET_NOVELS_COMPLETED_SUCCESS',

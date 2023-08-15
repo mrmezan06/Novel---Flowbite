@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import TablePagination from './TablePagination';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { getAllChapters } from '../action/chapterAction';
@@ -7,9 +6,10 @@ import moment from 'moment';
 import axios from 'axios';
 import { BASE_URL } from '../constant/baseUrl';
 import { useNavigate } from 'react-router-dom';
+import ChapterListPagination from './ChapterListPagination';
 
 const ChapterList = () => {
-  const { loading, error, chapters } = useSelector(
+  const { loading, error, chapters, total, pagination } = useSelector(
     (state) => state.allChapters
   );
 
@@ -109,7 +109,6 @@ const ChapterList = () => {
                   <td className={`px-6 py-4 font-bold`}>{chapter.status}</td>
 
                   <td className="px-6 py-4 flex flex-row gap-1">
-                    {/* TODO: Update functionality */}
                     {chapter.status === 'Draft' ? (
                       <span
                         className="bg-green-700 text-white py-2 px-3"
@@ -140,8 +139,10 @@ const ChapterList = () => {
               ))}
           </tbody>
         </table>
-        {/* TODO: Pagination */}
-        <TablePagination />
+
+        {chapters && (
+          <ChapterListPagination total={total} pagination={pagination} />
+        )}
       </div>
     </>
   );

@@ -238,12 +238,53 @@ const updateChapterById = async (req, res) => {
 
 const getAllChapter = async (req, res) => {
   try {
+
+    const page = Number(req.query.page) || 1;
+    const limit = 10;
+
     const chapters = await Chapter.find({})
       .select('-content')
-      .sort({ createdAt: -1 })
-      .populate('novelId', 'name');
-    const totalChapter = chapters.length;
-    return res.status(200).json({ success: true, chapters, totalChapter });
+      .populate('novelId', 'name')
+      .sort({ updatedAt: -1 })
+      .limit(10)
+      .skip(limit * (page - 1));
+
+    const count = await Chapter.countDocuments({});
+
+    const pages = Math.ceil(count / limit);
+
+    let startPage = null;
+    let endPage = null;
+
+    // if pages greater 10 then show only 10 pages in pagination
+    if (pages < 10) {
+      startPage = 1;
+      endPage = pages;
+    }
+
+    if (pages > 10) {
+      if (page <= 6) {
+        startPage = 1;
+        endPage = 10;
+      } else if (page + 4 >= pages) {
+        startPage = pages - 9;
+        endPage = pages;
+      } else {
+        startPage = page - 5;
+        endPage = page + 4;
+      }
+    }
+
+    const pagination = {
+      startPage,
+      endPage,
+      page,
+      pages,
+    };
+
+    return res
+      .status(200)
+      .json({ success: true, chapters, total: count, pagination });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

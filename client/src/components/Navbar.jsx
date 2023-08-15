@@ -1,6 +1,6 @@
 import { AiOutlineBars } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
-import { menuList, genreList, optionList } from '../utility/itemList';
+import { menuList, genreList } from '../utility/itemList';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -218,52 +218,7 @@ const Navbar = () => {
                   </ul>
                 </div>
               </li>
-              <li>
-                <button
-                  id="dropdownNavbarLink"
-                  data-dropdown-toggle="dropdownNavbar3"
-                  className="flex items-center justify-between w-full py-2 pl-3 pr-4 bg-gray-700  text-white border-b border-gray-100 hover:bg-gray-500 hover:text-gray-500 md:hover:bg-transparent md:border-0 md:hover:text-white-700 md:p-0 md:w-auto dark:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
-                >
-                  <AiOutlineBars className="w-5 h-5 mr-2" />
-                  Option
-                  <svg
-                    className="w-2.5 h-2.5 ml-2.5"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 10 6"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="m1 1 4 4 4-4"
-                    />
-                  </svg>
-                </button>
 
-                <div
-                  id="dropdownNavbar3"
-                  className="z-10 hidden font-normal bg-gray-700 divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
-                >
-                  <ul
-                    className="py-2 text-sm text-gray-700 dark:text-gray-400"
-                    aria-labelledby="dropdownLargeButton"
-                  >
-                    {optionList.map((option, i) => (
-                      <li key={i}>
-                        <a
-                          href="#!"
-                          className="block px-4 py-2 text-center text-white cursor-pointer hover:bg-gray-500 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                          {option}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </li>
               {user && (
                 <li>
                   <button

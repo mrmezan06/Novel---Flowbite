@@ -43,13 +43,15 @@ export const getChapter = (chapterId) => async (dispatch) => {
   }
 };
 
-export const getAllChapters = () => async (dispatch) => {
+export const getAllChapters = (page) => async (dispatch) => {
   try {
     dispatch({
       type: 'GET_ALL_CHAPTER_REQUEST',
     });
 
-    const { data } = await axios.get(`${BASE_URL}/api/chapter/all`);
+    const { data } = await axios.get(
+      `${BASE_URL}/api/chapter/all?page=${page ? page : 1}}`
+    );
 
     dispatch({
       type: 'GET_ALL_CHAPTER_SUCCESS',

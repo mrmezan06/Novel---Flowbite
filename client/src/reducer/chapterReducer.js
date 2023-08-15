@@ -58,6 +58,7 @@ export const getAllChapterReducer = (state = {}, action) => {
         loading: false,
         chapters: action.payload.chapters,
         total: action.payload.total,
+        pagination: action.payload.pagination,
       };
     case 'CHAPTER_ALL_RESET':
       return {};

@@ -30,6 +30,8 @@ export const getNovelReducer = (state = {}, action) => {
         loading: false,
         novel: action.payload.novel,
         chapters: action.payload.chapters,
+        total: action.payload.total,
+        pagination: action.payload.pagination,
         latestChapters: action.payload.latestChapters,
       };
     case 'GET_NOVEL_FAIL':
@@ -53,6 +55,7 @@ export const getNovelsReducer = (state = {}, action) => {
         loading: false,
         novels: action.payload.novels,
         totalNovel: action.payload.totalNovel,
+        pagination: action.payload.pagination,
         totalChapter: action.payload.totalChapter,
       };
     case 'GET_NOVELS_FAIL':
@@ -76,6 +79,7 @@ export const getLatestNovelsReducer = (state = {}, action) => {
         loading: false,
         novels: action.payload.novels,
         total: action.payload.total,
+        pagination: action.payload.pagination,
       };
     case 'GET_LATEST_NOVELS_FAIL':
       return {
@@ -98,6 +102,7 @@ export const getNovelsCompletedReducer = (state = {}, action) => {
         loading: false,
         novels: action.payload.novels,
         total: action.payload.total,
+        pagination: action.payload.pagination,
       };
     case 'GET_NOVELS_COMPLETED_FAIL':
       return {

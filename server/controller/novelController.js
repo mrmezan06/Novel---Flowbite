@@ -61,16 +61,53 @@ const createNovel = async (req, res) => {
 // @route   GET /api/novel
 // @access  Public
 const getAllNovels = async (req, res) => {
-  const novels = await Novel.find({});
+  const page = Number(req.query.page) || 1;
+  const limit = 10;
+  const novels = await Novel.find({})
+    .sort({ updatedAt: -1 })
+    .limit(10)
+    .skip(limit * (page - 1));
+
+  const chapterCount = await Chapter.countDocuments();
 
   const count = await Novel.countDocuments();
-  const chapterCount = await Chapter.countDocuments();
+  const pages = Math.ceil(count / limit);
+
+  let startPage = null;
+  let endPage = null;
+
+  // if pages greater 10 then show only 10 pages in pagination
+  if (pages < 10) {
+    startPage = 1;
+    endPage = pages;
+  }
+
+  if (pages > 10) {
+    if (page <= 6) {
+      startPage = 1;
+      endPage = 10;
+    } else if (page + 4 >= pages) {
+      startPage = pages - 9;
+      endPage = pages;
+    } else {
+      startPage = page - 5;
+      endPage = page + 4;
+    }
+  }
+
+  const pagination = {
+    startPage,
+    endPage,
+    page,
+    pages,
+  };
 
   if (novels) {
     return res.status(200).json({
       success: true,
       message: 'Get all novels successfully',
       totalNovel: count,
+      pagination,
       totalChapter: chapterCount,
       novels,
     });
@@ -85,16 +122,53 @@ const getAllNovels = async (req, res) => {
 // @route   GET /api/novel
 // @access  Public
 const getLatestNovels = async (req, res) => {
-  const novels = await Novel.find({}).sort({ updatedAt: -1 }).limit(10);
+  const page = Number(req.query.page) || 1;
+  const limit = 10;
+  const novels = await Novel.find({})
+    .sort({ updatedAt: -1 })
+    .limit(10)
+    .skip(limit * (page - 1));
 
   const count = await Novel.countDocuments();
+
+  const pages = Math.ceil(count / limit);
+
+  let startPage = null;
+  let endPage = null;
+
+  // if pages greater 10 then show only 10 pages in pagination
+  if (pages < 10) {
+    startPage = 1;
+    endPage = pages;
+  }
+
+  if (pages > 10) {
+    if (page <= 6) {
+      startPage = 1;
+      endPage = 10;
+    } else if (page + 4 >= pages) {
+      startPage = pages - 9;
+      endPage = pages;
+    } else {
+      startPage = page - 5;
+      endPage = page + 4;
+    }
+  }
+
+  const pagination = {
+    startPage,
+    endPage,
+    page,
+    pages,
+  };
 
   if (novels) {
     return res.status(200).json({
       success: true,
       message: 'Get all novels successfully',
-      total: count,
       novels,
+      total: count,
+      pagination,
     });
   } else {
     return res.status(500).json({
@@ -109,16 +183,54 @@ const getLatestNovels = async (req, res) => {
 // @access  Public
 const getNovelById = async (req, res) => {
   try {
+    const page = Number(req.query.page) || 1;
+    const limit = 10;
+
     const novel = await Novel.findById(req.params.id);
 
-    const chapters = await Chapter.find({ novelId: req.params.id }).select(
-      '-content'
-    );
+    const chapters = await Chapter.find({ novelId: req.params.id })
+      .select('-content')
+      .sort({ updatedAt: -1 })
+      .limit(10)
+      .skip(limit * (page - 1));
+
+    const count = await Chapter.countDocuments({ novelId: req.params.id });
+
+    const pages = Math.ceil(count / limit);
+
+    let startPage = null;
+    let endPage = null;
+
+    // if pages greater 10 then show only 10 pages in pagination
+    if (pages < 10) {
+      startPage = 1;
+      endPage = pages;
+    }
+
+    if (pages > 10) {
+      if (page <= 6) {
+        startPage = 1;
+        endPage = 10;
+      } else if (page + 4 >= pages) {
+        startPage = pages - 9;
+        endPage = pages;
+      } else {
+        startPage = page - 5;
+        endPage = page + 4;
+      }
+    }
+
+    const pagination = {
+      startPage,
+      endPage,
+      page,
+      pages,
+    };
+
     const latestChapters = await Chapter.find({ novelId: req.params.id })
       .sort({ updatedAt: -1 })
       .select('-content')
       .limit(5);
-
 
     if (novel) {
       return res.status(200).json({
@@ -126,6 +238,8 @@ const getNovelById = async (req, res) => {
         message: 'Get novel successfully',
         novel,
         chapters,
+        total: count,
+        pagination,
         latestChapters,
       });
     } else {
@@ -209,16 +323,54 @@ const deleteNovelById = async (req, res) => {
 };
 
 const getNovelsCompleted = async (req, res) => {
-  const novels = await Novel.find({ status: "Completed" });
+  const page = Number(req.query.page) || 1;
+  const limit = 10;
 
-  const count = await Novel.countDocuments();
+  const novels = await Novel.find({ status: 'Completed' })
+    .sort({ updatedAt: -1 })
+    .limit(10)
+    .skip(limit * (page - 1));
+
+  const count = await Novel.countDocuments({ status: 'Completed' });
+
+  const pages = Math.ceil(count / limit);
+
+  let startPage = null;
+  let endPage = null;
+
+  // if pages greater 10 then show only 10 pages in pagination
+  if (pages < 10) {
+    startPage = 1;
+    endPage = pages;
+  }
+
+  if (pages > 10) {
+    if (page <= 6) {
+      startPage = 1;
+      endPage = 10;
+    } else if (page + 4 >= pages) {
+      startPage = pages - 9;
+      endPage = pages;
+    } else {
+      startPage = page - 5;
+      endPage = page + 4;
+    }
+  }
+
+  const pagination = {
+    startPage,
+    endPage,
+    page,
+    pages,
+  };
 
   if (novels) {
     return res.status(200).json({
       success: true,
       message: 'Get all novels successfully',
-      total: count,
       novels,
+      total: count,
+      pagination,
     });
   } else {
     return res.status(500).json({
@@ -229,7 +381,9 @@ const getNovelsCompleted = async (req, res) => {
 };
 
 const getHotNovels = async (req, res) => {
-  const novels = await Novel.find({hotNovel: true}).sort({ updatedAt: -1 }).limit(10);
+  const novels = await Novel.find({ hotNovel: true })
+    .sort({ updatedAt: -1 })
+    .limit(11);
 
   const count = await Novel.countDocuments();
 

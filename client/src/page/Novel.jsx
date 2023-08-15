@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
-import TablePagination from '../components/TablePagination';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNovel } from '../action/novelAction';
 import moment from 'moment';
+import SingleNovelChapterPagination from '../components/SingleNovelChapterPagination';
 
 const Novel = () => {
   const location = useLocation();
   const id = location.search.split('=')[1];
   const navigate = useNavigate();
 
-  const { novel, chapters, latestChapters } = useSelector(
+  const { novel, chapters, latestChapters, total, pagination } = useSelector(
     (state) => state.novel
   );
 
@@ -149,9 +149,12 @@ const Novel = () => {
                 ))}
             </tbody>
           </table>
-          {/* TODO: Pagination */}
         </div>
-        <TablePagination />
+        <SingleNovelChapterPagination
+          total={total}
+          pagination={pagination}
+          novelId={id}
+        />
       </div>
     </>
   );

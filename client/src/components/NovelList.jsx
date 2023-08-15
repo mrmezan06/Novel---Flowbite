@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import TablePagination from './TablePagination';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { getNovels } from '../action/novelAction';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../constant/baseUrl';
+import NovelListPagination from './NovelListPagination';
 
-const NovelList = ({ loading, error, novels }) => {
+const NovelList = ({ loading, error, novels, totalNovel, pagination }) => {
   const { user } = useSelector((state) => state.login);
 
   const navigate = useNavigate();
@@ -130,12 +130,11 @@ const NovelList = ({ loading, error, novels }) => {
                   >
                     {novel.name}
                   </th>
-                  <td className="px-6 py-4">{novel?.category?.join(', ')}</td>
-                  <td className="px-6 py-4">{novel?.lastReleased}</td>
-                  <td className="px-6 py-4">{novel?.totalChapter}</td>
-                  <td className="px-6 py-4">{novel?.status}</td>
-                  <td className="px-6 py-4">
-                    {/* TODO: Update Functionality */}
+                  <td className="px-5 py-3">{novel?.category?.join(', ')}</td>
+                  <td className="px-5 py-3">{novel?.lastReleased}</td>
+                  <td className="px-5 py-3">{novel?.totalChapter}</td>
+                  <td className="px-5 py-3">{novel?.status}</td>
+                  <td className="px-5 py-3">
                     {novel?.hotNovel ? (
                       <span
                         className="bg-red-500 text-white py-2 px-3"
@@ -154,8 +153,7 @@ const NovelList = ({ loading, error, novels }) => {
                       </span>
                     )}
                   </td>
-                  <td className="px-6 py-4">
-                    {/* TODO: Update Functionality */}
+                  <td className="px-5 py-3">
                     {novel?.status === 'Ongoing' ? (
                       <span
                         className="bg-green-500 text-white py-2 px-3"
@@ -174,7 +172,7 @@ const NovelList = ({ loading, error, novels }) => {
                       </span>
                     )}
                   </td>
-                  <td className="px-6 py-4 inline-flex gap-1">
+                  <td className="px-5 py-3 inline-flex gap-1">
                     <span
                       className="bg-red-700 text-white py-2 px-3"
                       onClick={() => {
@@ -196,8 +194,7 @@ const NovelList = ({ loading, error, novels }) => {
               ))}
           </tbody>
         </table>
-        {/* TODO: Pagination need to handle */}
-        <TablePagination />
+        <NovelListPagination total={totalNovel} pagination={pagination} />
       </div>
     </>
   );

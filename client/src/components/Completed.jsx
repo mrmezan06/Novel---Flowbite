@@ -2,9 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
+import CompletedPagination from './CompletedPagination';
 
 const Completed = () => {
-  const { novels } = useSelector((state) => state.completed);
+  const { novels, total, pagination } = useSelector((state) => state.completed);
   const navigate = useNavigate();
 
   return (
@@ -62,6 +63,9 @@ const Completed = () => {
           <div className="bg-white border-b text-center cursor-pointer dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <h1 className="text-2xl py-5">No completed novel right now!</h1>
           </div>
+        )}
+        {novels && (
+          <CompletedPagination total={total} pagination={pagination} />
         )}
       </div>
     </>

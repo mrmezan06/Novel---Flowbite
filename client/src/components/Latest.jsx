@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
+import LatestPagination from './LatestPagination';
 const Latest = () => {
-  const { novels } = useSelector((state) => state.latest);
+  const { novels, total, pagination } = useSelector((state) => state.latest);
   const navigate = useNavigate();
   return (
     <>
@@ -59,6 +60,7 @@ const Latest = () => {
               ))}
           </tbody>
         </table>
+        {novels && <LatestPagination total={total} pagination={pagination} />}
       </div>
     </>
   );

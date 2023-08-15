@@ -11,9 +11,8 @@ const Dashboard = () => {
   const [current, setCurrent] = React.useState('All');
   const { user } = useSelector((state) => state.login);
 
-  const { loading, error, novels, totalNovel, totalChapter } = useSelector(
-    (state) => state.novels
-  );
+  const { loading, error, novels, totalNovel, totalChapter, pagination } =
+    useSelector((state) => state.novels);
 
   const navigate = useNavigate();
 
@@ -135,7 +134,13 @@ const Dashboard = () => {
             </div>
           </div>
           {novels && (
-            <NovelList loading={loading} error={error} novels={novels} />
+            <NovelList
+              loading={loading}
+              error={error}
+              novels={novels}
+              totalNovel={totalNovel}
+              pagination={pagination}
+            />
           )}
           {/* Chapter List */}
           <div className="flex flex-row justify-between border border-b-slate-700 w-[80%]">
