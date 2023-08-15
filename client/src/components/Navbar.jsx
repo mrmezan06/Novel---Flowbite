@@ -3,10 +3,18 @@ import { CgProfile } from 'react-icons/cg';
 import { menuList, genreList } from '../utility/itemList';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.login);
+  const [search, setSearch] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (search) {
+      navigate(`/search?search=${search}`, { replace: true });
+    }
+  }, [search, navigate]);
 
   return (
     <>
@@ -68,7 +76,9 @@ const Navbar = () => {
                 type="text"
                 id="search-navbar"
                 className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Search..."
+                placeholder="Search By Novel Name..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
             </div>
             <button
@@ -159,13 +169,13 @@ const Navbar = () => {
                     className="py-2 text-sm text-gray-700 dark:text-gray-400"
                     aria-labelledby="dropdownLargeButton"
                   >
-                    {menuList.map((novel, i) => (
+                    {menuList.map((item, i) => (
                       <li key={i}>
                         <a
-                          href="#!"
+                          href={`/#${item.key}`}
                           className="block px-4 py-2 text-center text-white cursor-pointer hover:bg-gray-500 dark:hover:bg-gray-600 dark:hover:text-white"
                         >
-                          {novel}
+                          {item.value}
                         </a>
                       </li>
                     ))}
@@ -208,7 +218,7 @@ const Navbar = () => {
                     {genreList.map((genre, i) => (
                       <li key={i}>
                         <a
-                          href="#!"
+                          href={`/genre?category=${genre}`}
                           className="block px-4 py-2 text-center text-white cursor-pointer hover:bg-gray-500 dark:hover:bg-gray-600 dark:hover:text-white"
                         >
                           {genre}

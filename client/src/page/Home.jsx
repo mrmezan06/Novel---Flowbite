@@ -5,12 +5,15 @@ import Completed from '../components/Completed';
 import { genreList } from '../utility/itemList';
 
 const Home = () => {
-  const [current, setCurrent] = React.useState('All');
+  const current = 'All';
 
   return (
     <>
       <div className="container mt-10 mb-10">
-        <div className="flex flex-row justify-between border border-b-slate-700">
+        <div
+          id="hot"
+          className="flex flex-row justify-between border border-b-slate-700"
+        >
           <h3 className="text-2xl font-semibold border border-b-black">
             Hot Novel
           </h3>
@@ -47,14 +50,13 @@ const Home = () => {
                 aria-labelledby="dropdownLargeButton"
               >
                 {genreList.map((genre, i) => (
-                  <li
-                    key={i}
-                    onClick={() => {
-                      setCurrent(genre);
-                    }}
-                    className="block px-4 py-2 text-center text-white cursor-pointer hover:bg-gray-500 dark:hover:bg-gray-600 dark:hover:text-white"
-                  >
-                    {genre}
+                  <li key={i}>
+                    <a
+                      href={`/genre?category=${genre}`}
+                      className="block px-4 py-2 text-center text-white cursor-pointer hover:bg-gray-500 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      {genre}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -62,11 +64,14 @@ const Home = () => {
           </div>
         </div>
         <Gallery />
-        <div className="flex flex-row justify-between border border-b-slate-700">
+        <div
+          id="latest"
+          className="flex flex-row justify-between border border-b-slate-700"
+        >
           <h3 className="text-2xl font-semibold border border-b-black">
             Latest Release
           </h3>
-          <div className="border border-b-black">
+          {/* <div className="border border-b-black">
             <button
               id="dropdownNavbarLink"
               data-dropdown-toggle="chapterDropdownMenu"
@@ -111,14 +116,17 @@ const Home = () => {
                 ))}
               </ul>
             </div>
-          </div>
+          </div> */}
         </div>
         <Latest />
-        <div className="flex flex-row justify-between border border-b-slate-700">
+        <div
+          id="completed"
+          className="flex flex-row justify-between border border-b-slate-700"
+        >
           <h3 className="text-2xl font-semibold border border-b-black">
             Completed Novel
           </h3>
-          <div className="border border-b-black">
+          {/*  <div className="border border-b-black">
             <button
               id="dropdownNavbarLink"
               data-dropdown-toggle="chapterDropdownMenu"
@@ -163,7 +171,7 @@ const Home = () => {
                 ))}
               </ul>
             </div>
-          </div>
+          </div> */}
         </div>
         <Completed />
       </div>

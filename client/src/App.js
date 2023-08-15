@@ -24,6 +24,8 @@ import {
 import { getAllChapters } from './action/chapterAction';
 import UpdateNovel from './page/UpdateNovel';
 import UpdateChapter from './page/UpdateChapter';
+import Search from './page/Search';
+import CategoryPage from './page/CategoryPage';
 
 function App() {
   const { user } = useSelector((state) => state.login);
@@ -64,6 +66,8 @@ function App() {
             element={user ? <UpdateChapter /> : <Login />}
           />
           <Route path="/novel" element={<Novel />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/genre" element={<CategoryPage />} />
           <Route path="/chapter" element={<Chapter />} />
           <Route path="/admin/login" element={<Login />} />
           <Route path="/admin/register" element={<Register />} />

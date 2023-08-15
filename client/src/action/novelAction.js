@@ -88,6 +88,52 @@ export const getNovels = (page) => async (dispatch) => {
   }
 };
 
+export const getSearchNovels = (search, page) => async (dispatch) => {
+  try {
+    dispatch({
+      type: 'GET_SEARCH_NOVELS_REQUEST',
+    });
+
+    const { data } = await axios.get(
+      `${BASE_URL}/api/novel/search?q=${search}&page=${page ? page : 1}`
+    );
+
+    dispatch({
+      type: 'GET_SEARCH_NOVELS_SUCCESS',
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: 'GET_SEARCH_NOVELS_FAIL',
+      payload: error,
+    });
+  }
+};
+
+export const getNovelsByCategory = (category, page) => async (dispatch) => {
+  try {
+    dispatch({
+      type: 'GET_NOVELS_BY_CATEGORY_REQUEST',
+    });
+
+    const { data } = await axios.get(
+      `${BASE_URL}/api/novel/category?category=${category}&page=${
+        page ? page : 1
+      }`
+    );
+
+    dispatch({
+      type: 'GET_NOVELS_BY_CATEGORY_SUCCESS',
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: 'GET_NOVELS_BY_CATEGORY_FAIL',
+      payload: error,
+    });
+  }
+};
+
 export const getLatestNovels = (page) => async (dispatch) => {
   try {
     dispatch({

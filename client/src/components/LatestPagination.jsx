@@ -40,7 +40,7 @@ const LatestPagination = ({ total, pagination }) => {
         <span className="text-sm font-normal text-gray-500 dark:text-gray-400 justify-center gap-2 hidden lg:flex md:flex 2xl:flex ">
           Showing{' '}
           <span className="font-semibold text-gray-900 dark:text-white">
-            1-{total < 10 ? total : 10}
+            {total < 1 ? 0 : 1}-{total < 10 ? total : 10}
           </span>{' '}
           of{' '}
           <span className="font-semibold text-gray-900 dark:text-white">

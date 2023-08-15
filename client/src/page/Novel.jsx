@@ -39,10 +39,10 @@ const Novel = () => {
           {novel && (
             <div className="flex flex-col p-5 lg:flex-row md:flex-col justify-between">
               {/* Left side Novel Info and Cover */}
-              <div className="flex flex-col justify-between">
-                <div className="mt-5 w-[100%] lg:w-[80%] md:w-[100%] sm:w-[100%]">
+              <div className="flex flex-col gap-5 mr-5 justify-between">
+                <div className="mt-5 w-[100%] lg:w-[100%] md:w-[100%] sm:w-[100%] cursor-pointer">
                   <img
-                    className="h-[400px] w-[100%]"
+                    className="h-[450px] w-[100%]"
                     src={novel.coverUrl}
                     alt={novel.name}
                   />
@@ -150,11 +150,13 @@ const Novel = () => {
             </tbody>
           </table>
         </div>
-        <SingleNovelChapterPagination
-          total={total}
-          pagination={pagination}
-          novelId={id}
-        />
+        {chapters && (
+          <SingleNovelChapterPagination
+            total={total}
+            pagination={pagination}
+            novelId={id}
+          />
+        )}
       </div>
     </>
   );

@@ -27,6 +27,10 @@ const genreList = [
   'Xuanhuan',
 ];
 
-const menuList = ['Latest Release', 'Hot Novel', 'Completed Novel'];
+const menuList = [
+  { key: 'latest', value: 'Latest Release' },
+  { key: 'hot', value: 'Hot Novel' },
+  { key: 'completed', value: 'Completed Novel' },
+];
 
 module.exports = { genreList, menuList };

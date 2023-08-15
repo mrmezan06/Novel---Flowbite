@@ -8,6 +8,8 @@ const {
   getLatestNovels,
   getNovelsCompleted,
   getHotNovels,
+  getSearchNovels,
+  getNovelsByCategory,
 } = require('../controller/novelController');
 const { checkAuth, checkRole } = require('../utils/checkAuth');
 
@@ -15,6 +17,8 @@ const router = express.Router();
 
 router.post('/', checkAuth, checkRole('ADMIN'), createNovel);
 router.get('/', getAllNovels);
+router.get('/search', getSearchNovels);
+router.get('/category', getNovelsByCategory);
 router.get('/completed', getNovelsCompleted);
 router.get('/hot', getHotNovels);
 router.get('/latest', getLatestNovels);

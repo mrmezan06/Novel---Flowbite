@@ -68,6 +68,53 @@ export const getNovelsReducer = (state = {}, action) => {
   }
 };
 
+export const getSearchNovelsReducer = (state = {}, action) => {
+  switch (action.type) {
+    case 'GET_SEARCH_NOVELS_REQUEST':
+      return {
+        loading: true,
+      };
+    case 'GET_SEARCH_NOVELS_SUCCESS':
+      return {
+        loading: false,
+        novels: action.payload.novels,
+        total: action.payload.total,
+        pagination: action.payload.pagination,
+      };
+    case 'GET_SEARCH_NOVELS_FAIL':
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export const getNovelsByCategoryReducer = (state = {}, action) => {
+  switch (action.type) {
+    case 'GET_NOVELS_BY_CATEGORY_REQUEST':
+      return {
+        loading: true,
+      };
+    case 'GET_NOVELS_BY_CATEGORY_SUCCESS':
+      return {
+        loading: false,
+        novels: action.payload.novels,
+        total: action.payload.total,
+        pagination: action.payload.pagination,
+      };
+    case 'GET_NOVELS_BY_CATEGORY_FAIL':
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+
 export const getLatestNovelsReducer = (state = {}, action) => {
   switch (action.type) {
     case 'GET_LATEST_NOVELS_REQUEST':

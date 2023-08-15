@@ -10,6 +10,8 @@ const {
   getLatestNovelsReducer,
   getNovelsCompletedReducer,
   getHotNovelsReducer,
+  getSearchNovelsReducer,
+  getNovelsByCategoryReducer,
 } = require('./reducer/novelReducer');
 const {
   getChapterReducer,
@@ -21,6 +23,8 @@ const reducer = combineReducers({
   login: loginReducer,
   novel: getNovelReducer,
   novels: getNovelsReducer,
+  search: getSearchNovelsReducer,
+  category: getNovelsByCategoryReducer,
   novelCreate: createNovelReducer,
   latest: getLatestNovelsReducer,
   completed: getNovelsCompletedReducer,
