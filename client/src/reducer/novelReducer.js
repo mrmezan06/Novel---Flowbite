@@ -52,7 +52,8 @@ export const getNovelsReducer = (state = {}, action) => {
       return {
         loading: false,
         novels: action.payload.novels,
-        total: action.payload.total,
+        totalNovel: action.payload.totalNovel,
+        totalChapter: action.payload.totalChapter,
       };
     case 'GET_NOVELS_FAIL':
       return {

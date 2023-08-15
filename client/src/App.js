@@ -22,6 +22,7 @@ import {
 } from './action/novelAction';
 
 import { getAllChapters } from './action/chapterAction';
+import UpdateNovel from './page/UpdateNovel';
 
 function App() {
   const { user } = useSelector((state) => state.login);
@@ -46,11 +47,15 @@ function App() {
 
           {/* <Route path="/dashboard" element={<Dashboard />} /> */}
           <Route
-            path="/create/novel"
+            path="/novel/create"
             element={user ? <CreateNovel /> : <Login />}
           />
           <Route
-            path="/add/chapter"
+            path="/novel/update/:id"
+            element={user ? <UpdateNovel /> : <Login />}
+          />
+          <Route
+            path="/chapter/add"
             element={user ? <AddChapter /> : <Login />}
           />
           <Route path="/novel" element={<Novel />} />

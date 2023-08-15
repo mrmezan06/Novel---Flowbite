@@ -64,12 +64,14 @@ const getAllNovels = async (req, res) => {
   const novels = await Novel.find({});
 
   const count = await Novel.countDocuments();
+  const chapterCount = await Chapter.countDocuments();
 
   if (novels) {
     return res.status(200).json({
       success: true,
       message: 'Get all novels successfully',
-      total: count,
+      totalNovel: count,
+      totalChapter: chapterCount,
       novels,
     });
   } else {

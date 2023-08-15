@@ -9,7 +9,11 @@ import { logout } from '../action/userAction';
 
 const Dashboard = () => {
   const [current, setCurrent] = React.useState('All');
-  const { loading, error, user } = useSelector((state) => state.login);
+  const { user } = useSelector((state) => state.login);
+
+  const { loading, error, novels, totalNovel, totalChapter } = useSelector(
+    (state) => state.novels
+  );
 
   const navigate = useNavigate();
 
@@ -54,21 +58,21 @@ const Dashboard = () => {
           <div className="flex flex-col gap-1 justify-center xl:flex-row lg:flex-row md:flex-row">
             <span
               className="bg-blue-600 text-white py-2 px-3 cursor-pointer"
-              onClick={() => navigate('/create/novel')}
+              onClick={() => navigate('/novel/create')}
             >
               Create Novel
             </span>
             <span className="bg-red-700 text-white py-2 px-3 cursor-pointer">
-              Total Novel : 10
+              Total Novel : {totalNovel ? totalNovel : 0}
             </span>
             <span
               className="bg-green-500 text-white py-2 px-3 cursor-pointer"
-              onClick={() => navigate('/add/chapter')}
+              onClick={() => navigate('/chapter/add')}
             >
               Add Chapter
             </span>
             <span className="bg-red-700 text-white py-2 px-3 cursor-pointer">
-              Total Chapter : 100
+              Total Chapter : {totalChapter ? totalChapter : 0}
             </span>
             <span
               className="bg-yellow-900 text-white py-2 px-3 cursor-pointer"
@@ -130,7 +134,9 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <NovelList />
+          {novels && (
+            <NovelList loading={loading} error={error} novels={novels} />
+          )}
           {/* Chapter List */}
           <div className="flex flex-row justify-between border border-b-slate-700 w-[80%]">
             <h3 className="text-2xl font-semibold border border-b-black">

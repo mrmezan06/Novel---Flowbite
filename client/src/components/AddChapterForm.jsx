@@ -185,7 +185,7 @@ const AddChapterForm = ({ novels }) => {
               Want to add a new novel?
             </p>
             <a
-              href="/create/novel"
+              href="/novel/create"
               className=" px-5 py-2.5 text-sm font-bold text-center text-black "
             >
               Create Novel

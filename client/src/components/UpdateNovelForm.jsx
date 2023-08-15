@@ -1,23 +1,31 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { genreList } from '../utility/itemList';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { BASE_URL } from '../constant/baseUrl';
-const CreateNovelForm = () => {
+import { getNovel } from '../action/novelAction';
+import { useLocation } from 'react-router-dom';
+const UpdateNovelForm = () => {
   const [category, setCategory] = useState([]);
   const [name, setName] = useState('');
   const [coverUrl, setCoverUrl] = useState('');
   const [author, setAuthor] = useState('');
   const [alternativeName, setAlternativeName] = useState('');
   const [description, setDescription] = useState('');
-  const [loading, setLoading] = useState(false);
 
   const { user } = useSelector((state) => state.login);
+  const { loading, error, novel } = useSelector((state) => state.novel);
 
-  const handleCreate = async (e) => {
+  const dispatch = useDispatch();
+
+  const location = useLocation();
+  const novelId = location.pathname.split('/')[3];
+
+  console.log(novelId);
+
+  const handleUpdate = async (e) => {
     e.preventDefault();
-    setLoading(true);
 
     const config = {
       headers: {
@@ -27,8 +35,8 @@ const CreateNovelForm = () => {
     };
 
     await axios
-      .post(
-        `${BASE_URL}/api/chapter`,
+      .put(
+        `${BASE_URL}/api/novel/${novelId}`,
         {
           name,
           coverUrl,
@@ -40,29 +48,40 @@ const CreateNovelForm = () => {
         config
       )
       .then((res) => {
-        setName('');
-        setCoverUrl('');
-        setCategory([]);
-        setAuthor('');
-        setAlternativeName('');
-        setDescription('');
-        toast.success('Novel added successfully');
-        setLoading(false);
+        toast.success(res.data.message);
       })
       .catch((err) => {
         toast.error(err.response.data.message);
-        setLoading(false);
       });
   };
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+
+    if (novelId && !novel) {
+      dispatch(getNovel(novelId));
+    }
+
+    if (novel) {
+      setName(novel.name);
+      setCoverUrl(novel.coverUrl);
+      setCategory(novel.category);
+      setAuthor(novel.author);
+      setAlternativeName(novel.alternativeName);
+      setDescription(novel.description);
+    }
+  }, [loading, error, novelId, novel, dispatch]);
 
   return (
     <>
       <section className="bg-white border border-slate-900 mt-3 rounded-md  px-10 shadow-lg shadow-slate-600 dark:bg-gray-900 ">
         <div className="py-2 px-4 mx-10 max-w-2xl lg:py-16">
           <h2 className="mb-4 text-center text-xl font-bold text-gray-900 dark:text-white">
-            Create Novel
+            Update Novel
           </h2>
-          <form onSubmit={handleCreate}>
+          <form onSubmit={handleUpdate}>
             <div className="grid gap-3 sm:grid-cols-2 sm:gap-2">
               <div className="sm:col-span-2">
                 <label
@@ -205,7 +224,7 @@ const CreateNovelForm = () => {
                 className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-gray-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
                 disabled={loading}
               >
-                Create
+                Update
               </button>
             </div>
           </form>
@@ -226,4 +245,4 @@ const CreateNovelForm = () => {
   );
 };
 
-export default CreateNovelForm;
+export default UpdateNovelForm;

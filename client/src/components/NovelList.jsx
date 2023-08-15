@@ -4,11 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { getNovels } from '../action/novelAction';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../constant/baseUrl';
 
-const NovelList = () => {
-  const { loading, error, novels } = useSelector((state) => state.novels);
+const NovelList = ({ loading, error, novels }) => {
   const { user } = useSelector((state) => state.login);
+
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   useEffect(() => {
     if (!novels) {
@@ -34,7 +37,7 @@ const NovelList = () => {
         .put(`${BASE_URL}/api/novel/${id}`, { hotNovel }, config)
         .then((res) => {
           dispatch(getNovels());
-          toast.success('Novel is now in the Hot 🔥');
+          toast.success('Hot 🔥 List Updated');
         })
         .catch((err) => {
           toast.error(err);
@@ -48,7 +51,7 @@ const NovelList = () => {
         .put(`${BASE_URL}/api/novel/${id}`, { hotNovel }, config)
         .then((res) => {
           dispatch(getNovels());
-          toast.warning('Novel is removed from the Hot');
+          toast.warning('Hot 🔥 List Updated and Removed One');
         })
         .catch((err) => {
           toast.error(err);
@@ -61,7 +64,7 @@ const NovelList = () => {
         .put(`${BASE_URL}/api/novel/${id}`, { status }, config)
         .then((res) => {
           dispatch(getNovels());
-          toast.success('Novel is now Completed');
+          toast.success('Novel is completed');
         })
         .catch((err) => {
           toast.error(err);
@@ -74,7 +77,7 @@ const NovelList = () => {
         .put(`${BASE_URL}/api/novel/${id}`, { status }, config)
         .then((res) => {
           dispatch(getNovels());
-          toast.warning('Novel is now Ongoing');
+          toast.warning('Novel is ongoing');
         })
         .catch((err) => {
           toast.error(err);
@@ -135,11 +138,11 @@ const NovelList = () => {
                     {/* TODO: Update Functionality */}
                     {novel?.hotNovel ? (
                       <span
-                        className="bg-green-500 text-white py-2 px-3"
+                        className="bg-red-500 text-white py-2 px-3"
                         onClick={() => handleUpdate(novel._id, 'unhot')}
                         disabled={loading}
                       >
-                        Remove Hot
+                        Remove
                       </span>
                     ) : (
                       <span
@@ -147,11 +150,11 @@ const NovelList = () => {
                         onClick={() => handleUpdate(novel._id, 'hot')}
                         disabled={loading}
                       >
-                        Make Hot
+                        Make
                       </span>
                     )}
                   </td>
-                  <td className="px-6 py-4 flex flex-row gap-1">
+                  <td className="px-6 py-4">
                     {/* TODO: Update Functionality */}
                     {novel?.status === 'Ongoing' ? (
                       <span
@@ -159,7 +162,7 @@ const NovelList = () => {
                         onClick={() => handleUpdate(novel._id, 'complete')}
                         disabled={loading}
                       >
-                        Make Completed
+                        Completed
                       </span>
                     ) : (
                       <span
@@ -167,11 +170,20 @@ const NovelList = () => {
                         onClick={() => handleUpdate(novel._id, 'ongoing')}
                         disabled={loading}
                       >
-                        Make Ongoing
+                        Ongoing
                       </span>
                     )}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 inline-flex gap-1">
+                    <span
+                      className="bg-red-700 text-white py-2 px-3"
+                      onClick={() => {
+                        navigate(`/novel/update/${novel._id}`);
+                      }}
+                      disabled={loading}
+                    >
+                      Update
+                    </span>
                     <span
                       className="bg-red-700 text-white py-2 px-3"
                       onClick={() => {}}
