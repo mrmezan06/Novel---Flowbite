@@ -1,9 +1,40 @@
-import React from 'react';
+import { useState } from 'react';
+
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import { BASE_URL } from '../constant/baseUrl';
 
 const Register = () => {
-  const handleRegister = (e) => {
-    e.preventDefault();
-    console.log('Handle Register');
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const handleRegister = async () => {
+    if (password !== confirmPassword) {
+      toast.error('Passwords do not match');
+    } else {
+      const user = {
+        name,
+        username,
+        imageUrl,
+        password,
+      };
+
+      try {
+        await axios
+          .post(`${BASE_URL}/api/user/register`, user)
+          .then((res) => {
+            toast.success('User registered successfully');
+          })
+          .catch((err) => {
+            toast.error(err);
+          });
+      } catch (error) {
+        toast.error(error);
+      }
+    }
   };
 
   return (
@@ -28,6 +59,8 @@ const Register = () => {
                   id="name"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Type your name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
               <div className="sm:col-span-2">
@@ -43,6 +76,8 @@ const Register = () => {
                   id="username"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Choose your username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
 
@@ -59,6 +94,8 @@ const Register = () => {
                   id="password"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Type your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               <div className="w-full">
@@ -74,6 +111,8 @@ const Register = () => {
                   id="confirm"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Type your password again"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                 />
               </div>
               <div className="sm:col-span-2">
@@ -89,6 +128,8 @@ const Register = () => {
                   id="profile"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Type your profile image url"
+                  value={imageUrl}
+                  onChange={(e) => setImageUrl(e.target.value)}
                 />
               </div>
             </div>
