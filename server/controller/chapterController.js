@@ -243,11 +243,12 @@ const getAllChapter = async (req, res) => {
     const limit = 10;
 
     const chapters = await Chapter.find({})
+      .sort({ createdAt: 1 })
       .select('-content')
       .populate('novelId', 'name')
-      .sort({ updatedAt: -1 })
       .limit(10)
       .skip(limit * (page - 1));
+      
 
     const count = await Chapter.countDocuments({});
 

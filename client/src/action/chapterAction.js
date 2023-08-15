@@ -50,7 +50,7 @@ export const getAllChapters = (page) => async (dispatch) => {
     });
 
     const { data } = await axios.get(
-      `${BASE_URL}/api/chapter/all?page=${page ? page : 1}}`
+      `${BASE_URL}/api/chapter/all?page=${page ? page : 1}`
     );
 
     dispatch({

@@ -21,10 +21,10 @@ const Novel = () => {
       navigate('/', { replace: true });
     }
 
-    if (id && !novel) {
+    if (id && chapters?.length === 0) {
       dispatch(getNovel(id));
     }
-  }, [id, navigate, dispatch, novel]);
+  }, [id, navigate, dispatch, chapters]);
 
   return (
     <>

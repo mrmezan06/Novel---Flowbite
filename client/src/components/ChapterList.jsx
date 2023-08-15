@@ -18,9 +18,10 @@ const ChapterList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
-    if (!chapters) {
+    if (chapters?.length === 0) {
       dispatch(getAllChapters());
     }
+
     if (error) {
       toast.error(error);
     }
@@ -39,7 +40,7 @@ const ChapterList = () => {
       await axios
         .put(`${BASE_URL}/api/chapter/${id}`, { status }, config)
         .then((res) => {
-          dispatch(getAllChapters());
+          //dispatch(getAllChapters());
           toast.success('Chapter is now in Draft');
         })
         .catch((err) => {

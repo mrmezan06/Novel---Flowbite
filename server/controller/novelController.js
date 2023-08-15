@@ -307,7 +307,7 @@ const getNovelById = async (req, res) => {
 
     const chapters = await Chapter.find({ novelId: req.params.id })
       .select('-content')
-      .sort({ updatedAt: -1 })
+      .sort({ createdAt: 1 })
       .limit(10)
       .skip(limit * (page - 1));
 
@@ -345,7 +345,7 @@ const getNovelById = async (req, res) => {
     };
 
     const latestChapters = await Chapter.find({ novelId: req.params.id })
-      .sort({ updatedAt: -1 })
+      .sort({ createdAt: -1 })
       .select('-content')
       .limit(5);
 
