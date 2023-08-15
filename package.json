@@ -1,7 +1,7 @@
 {
   "name": "novel",
   "version": "1.0.0",
-  "description": "<img src=\"./readme/home.png\" alt=\"Home Page\" />",
+  "description": "Chinese novel collection in english",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./server/index.js",
