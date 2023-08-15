@@ -122,19 +122,39 @@ const NovelList = ({ loading, error, novels, totalNovel, pagination }) => {
               novels.map((novel) => (
                 <tr
                   key={novel._id}
-                  onClick={() => navigate(`/novel?id=${novel._id}`)}
                   className="bg-white border-b cursor-pointer dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                 >
                   <th
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    onClick={() => navigate(`/novel?id=${novel._id}`)}
                   >
                     {novel.name}
                   </th>
-                  <td className="px-5 py-3">{novel?.category?.join(', ')}</td>
-                  <td className="px-5 py-3">{novel?.lastReleased}</td>
-                  <td className="px-5 py-3">{novel?.totalChapter}</td>
-                  <td className="px-5 py-3">{novel?.status}</td>
+                  <td
+                    className="px-5 py-3"
+                    onClick={() => navigate(`/novel?id=${novel._id}`)}
+                  >
+                    {novel?.category?.join(', ')}
+                  </td>
+                  <td
+                    className="px-5 py-3"
+                    onClick={() => navigate(`/novel?id=${novel._id}`)}
+                  >
+                    {novel?.lastReleased}
+                  </td>
+                  <td
+                    className="px-5 py-3"
+                    onClick={() => navigate(`/novel?id=${novel._id}`)}
+                  >
+                    {novel?.totalChapter}
+                  </td>
+                  <td
+                    className="px-5 py-3"
+                    onClick={() => navigate(`/novel?id=${novel._id}`)}
+                  >
+                    {novel?.status}
+                  </td>
                   <td className="px-5 py-3">
                     {novel?.hotNovel ? (
                       <span
