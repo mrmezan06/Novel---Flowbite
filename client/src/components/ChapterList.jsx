@@ -6,6 +6,7 @@ import { getAllChapters } from '../action/chapterAction';
 import moment from 'moment';
 import axios from 'axios';
 import { BASE_URL } from '../constant/baseUrl';
+import { useNavigate } from 'react-router-dom';
 
 const ChapterList = () => {
   const { loading, error, chapters } = useSelector(
@@ -14,6 +15,7 @@ const ChapterList = () => {
 
   const { user } = useSelector((state) => state.login);
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     if (!chapters) {
@@ -125,7 +127,12 @@ const ChapterList = () => {
                         Draft
                       </span>
                     )}
-                    <span className="bg-red-700 text-white py-2 px-3">
+                    <span
+                      className="bg-red-700 text-white py-2 px-3"
+                      onClick={() => {
+                        navigate(`/chapter/update/${chapter._id}`);
+                      }}
+                    >
                       Update
                     </span>
                   </td>

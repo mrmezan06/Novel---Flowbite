@@ -211,6 +211,8 @@ const updateChapterById = async (req, res) => {
   try {
     const { chapterId } = req.params;
 
+    console.log(chapterId);
+
     const chapterToUpdate = await Chapter.findById(chapterId);
     if (!chapterToUpdate) {
       return res

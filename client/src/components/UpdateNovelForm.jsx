@@ -22,8 +22,6 @@ const UpdateNovelForm = () => {
   const location = useLocation();
   const novelId = location.pathname.split('/')[3];
 
-  console.log(novelId);
-
   const handleUpdate = async (e) => {
     e.preventDefault();
 

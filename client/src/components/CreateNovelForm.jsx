@@ -28,7 +28,7 @@ const CreateNovelForm = () => {
 
     await axios
       .post(
-        `${BASE_URL}/api/chapter`,
+        `${BASE_URL}/api/novel`,
         {
           name,
           coverUrl,

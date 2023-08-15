@@ -11,7 +11,7 @@ const Gallery = () => {
         <div className="w-[100%] lg:w-[40%] md:w-[100%] sm:w-[100%]">
           {novels && featureArray.length !== 0 && (
             <img
-              className="h-[400px] w-[100%]"
+              className="h-auto w-[100%]"
               src={featureArray[0]?.coverUrl}
               alt="Featured"
             />
@@ -23,7 +23,7 @@ const Gallery = () => {
             othersArray.map((other, i) => (
               <div key={i} className="w-max-full">
                 <img
-                  className="h-[192px] w-[200px] xsm:w-[300px] xmd:w-[200px] sm:w-[180px] md:w-[180px] lg:w-[130px] xl:w-[160px] 2xl:w-[180px]"
+                  className="h-[235px] w-[200px] xsm:w-[300px] xmd:w-[200px] sm:w-[180px] md:w-[180px] lg:w-[130px] xl:w-[160px] 2xl:w-[180px]"
                   src={other.coverUrl}
                   alt={i}
                 />

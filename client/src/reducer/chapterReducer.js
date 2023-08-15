@@ -35,6 +35,8 @@ export const getChapterReducer = (state = {}, action) => {
         nextChapter: action.payload.nextChapter,
         chapterList: action.payload.chapterList,
       };
+    case 'CHAPTER_RESET':
+      return {};
     case 'GET_CHAPTER_FAIL':
       return {
         loading: false,
@@ -57,6 +59,8 @@ export const getAllChapterReducer = (state = {}, action) => {
         chapters: action.payload.chapters,
         total: action.payload.total,
       };
+    case 'CHAPTER_ALL_RESET':
+      return {};
     case 'GET_ALL_CHAPTER_FAIL':
       return {
         loading: false,
