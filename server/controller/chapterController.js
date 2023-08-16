@@ -258,7 +258,7 @@ const getAllChapter = async (req, res) => {
     let endPage = null;
 
     // if pages greater 10 then show only 10 pages in pagination
-    if (pages < 10) {
+    if (pages <= 10) {
       startPage = 1;
       endPage = pages;
     }
