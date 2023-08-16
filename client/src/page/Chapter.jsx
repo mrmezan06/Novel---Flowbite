@@ -28,7 +28,10 @@ const Chapter = () => {
   return (
     <>
       {novel && (
-        <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white text-center">
+        <h1
+          onClick={() => navigate(`/novel/${novel._id}`)}
+          className="mb-4 text-3xl font-extrabold leading-none tracking-tight cursor-pointer text-green-900 md:text-3xl lg:text-4xl xl:text-4xl 2xl:text-4xl dark:text-white text-center"
+        >
           {novel.name}
         </h1>
       )}
@@ -39,7 +42,10 @@ const Chapter = () => {
       )}
       {chapter &&
         chapter.content.map((content, index) => (
-          <p className="max-w-[1080px] text-justify m-5" key={index}>
+          <p
+            className="max-w-[1080px] text-justify m-5 tracking-wider leading-7"
+            key={index}
+          >
             {content}
             <br />
           </p>

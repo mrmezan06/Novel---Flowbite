@@ -45,23 +45,23 @@ const Novel = () => {
                 <div className="mt-10 flex flex-col gap-3 justify-between w-[100%] lg:w-[50%] md:w-[100%] sm:w-[100%]">
                   <div className="flex flex-row gap-4 items-center justify-start flex-wrap">
                     <h3 className="text-xl font-semibold">Author:</h3>
-                    <p className="text-justify">{novel.author}</p>
+                    <p className="text-left">{novel.author}</p>
                   </div>
                   <div className="flex flex-row gap-4 items-center justify-start flex-wrap">
                     <h3 className="text-xl font-semibold">
                       Alternative names:
                     </h3>
-                    <p className="text-justify">{novel.alternativeName}</p>
+                    <p className="text-left">{novel.alternativeName}</p>
                   </div>
                   <div className="flex flex-row gap-4 items-center justify-start flex-wrap ">
                     <h3 className="text-xl font-semibold">Genre:</h3>
-                    <p className="text-justify text-lg">
+                    <p className="text-left text-lg">
                       {novel.category.join(', ')}
                     </p>
                   </div>
                   <div className="flex flex-row gap-4 items-center justify-start flex-wrap ">
                     <h3 className="text-xl font-semibold">Status:</h3>
-                    <p className="text-justify text-lg">{novel.status}</p>
+                    <p className="text-left text-lg">{novel.status}</p>
                   </div>
                 </div>
               </div>
@@ -89,7 +89,7 @@ const Novel = () => {
                         className="text-justify text-xl font-medium cursor-pointer"
                         onClick={() => navigate(`/chapter?id=${chapter._id}`)}
                       >
-                        {i + 1}. Chapter - {chapter.chapter}
+                        # Chapter - {chapter.chapter}
                       </p>
                     ))}
                 </div>
