@@ -42,13 +42,12 @@ const Chapter = () => {
       )}
       {chapter &&
         chapter.content.map((content, index) => (
-          <p
-            className="max-w-[1080px] text-justify m-5 tracking-wider leading-7"
-            key={index}
-          >
-            {content}
-            <br />
-          </p>
+          <div className="container ml-auto" key={index}>
+            <p className="max-w-[1080px] text-justify m-5 tracking-wider leading-7">
+              {content}
+              <br />
+            </p>
+          </div>
         ))}
 
       {/* Pagination */}
