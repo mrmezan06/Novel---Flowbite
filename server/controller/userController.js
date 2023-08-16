@@ -85,12 +85,14 @@ const loginUser = async (req, res) => {
     });
   }
 
+  // TODO: Changed to process.env.ACCESS_TOKEN_SECRET
+  // TODO: Changed to process.env.ACCESS_TOKEN_LIFE
   // Create access token with user and role
   const accessToken = jwt.sign(
     { userId: user._id, username: user.username, roles: user.roles },
-    process.env.ACCESS_TOKEN_SECRET,
+    process.env.ACCESSTOKENSECRET,
     {
-      expiresIn: process.env.ACCESS_TOKEN_LIFE,
+      expiresIn: process.env.ACCESSTOKENLIFE,
     }
   );
 

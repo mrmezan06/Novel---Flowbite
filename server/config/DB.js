@@ -4,10 +4,12 @@ const colors = require('colors');
 const connectDB = async () => {
   try {
     const connectionParams = {
-      dbName: process.env.DB_NAME,
+      // TODO: Changed to process.env.DB_NAME
+      dbName: process.env.DBNAME,
     };
     const conn = await moongoose.connect(
-      process.env.MONGO_URI,
+      // TODO: Changed to process.env.MONGO_URI
+      process.env.MONGOURI,
       connectionParams
     );
     console.log(

@@ -17,8 +17,9 @@ connectDB();
 
 const app = express();
 
+// TODO: Changed to process.env.NODE_ENV
 // Development logging with Morgan
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODEENV === 'development') {
   app.use(morgan('dev'));
 }
 

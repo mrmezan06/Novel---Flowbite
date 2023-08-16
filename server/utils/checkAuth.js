@@ -7,7 +7,8 @@ const checkAuth = (req, res, next) => {
     // console.log(token);
 
     if (token) {
-      const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+      // TODO: Changed to process.env.ACCESS_TOKEN_SECRET
+      const decoded = jwt.verify(token, process.env.ACCESSTOKENSECRET);
 
       req.user = decoded;
       next();
