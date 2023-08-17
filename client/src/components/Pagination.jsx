@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 const Pagination = ({
   chapterList,
   nextChapter,
@@ -7,10 +7,10 @@ const Pagination = ({
 }) => {
   return (
     <>
-      <div className="flex justify-center align-bottom">
+      <div className="flex mt-10 justify-center align-bottom">
         {/* <!-- Previous Button --> */}
-        <a
-          href={
+        <Link
+          to={
             prevChapter === null
               ? `/chapter?id=${currentChapter._id}`
               : `/chapter?id=${prevChapter._id}`
@@ -33,7 +33,7 @@ const Pagination = ({
             />
           </svg>
           Previous
-        </a>
+        </Link>
         <div className="flex flex-col 2xl:flex-row xl:flex-row lg:flex-row md:flex-row sm:flex-col">
           {chapterList &&
             chapterList.map((chapter) => (

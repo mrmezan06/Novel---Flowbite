@@ -1,47 +1,53 @@
 import React from 'react';
 
-const Footer = () => {
+const Footer = ({ path, createPath }) => {
   return (
     <>
-      <footer className="bg-white dark:bg-gray-900 flex justify-center">
+      <footer
+        className={`${
+          path === 'chapter' || createPath === 'create'
+            ? 'bg-gray-900 text-white select-none'
+            : 'select-none dark:bg-gray-900 flex justify-center'
+        }`}
+      >
         <div className="mx-auto w-full max-w-screen-xl">
           <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold uppercase dark:text-white">
                 Company
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className="dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                  <a href="/" className=" hover:underline">
+                  <a href="/" className="transition-all hover:font-bold">
                     About
                   </a>
                 </li>
                 <li className="mb-4">
-                  <a href="/" className="hover:underline">
+                  <a href="/" className="transition-all hover:font-bold">
                     Careers
                   </a>
                 </li>
                 <li className="mb-4">
-                  <a href="/" className="hover:underline">
+                  <a href="/" className="transition-all hover:font-bold">
                     Brand Center
                   </a>
                 </li>
                 <li className="mb-4">
-                  <a href="/" className="hover:underline">
+                  <a href="/" className="transition-all hover:font-bold">
                     Blog
                   </a>
                 </li>
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold  uppercase dark:text-white">
                 Help center
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className=" dark:text-gray-400 font-medium">
                 <li className="mb-4">
                   <a
                     href="https://discordapp.com/users/108888888888888888"
-                    className="hover:underline"
+                    className="transition-all hover:font-bold"
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -51,7 +57,7 @@ const Footer = () => {
                 <li className="mb-4">
                   <a
                     href="https://www.twitter.com/MejanurMezan"
-                    className="hover:underline"
+                    className="transition-all hover:font-bold"
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -61,7 +67,7 @@ const Footer = () => {
                 <li className="mb-4">
                   <a
                     href="https://m.me/mejanur.mezan.3"
-                    className="hover:underline"
+                    className="transition-all hover:font-bold"
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -71,7 +77,7 @@ const Footer = () => {
                 <li className="mb-4">
                   <a
                     href="mailto:mrmezan06@gmail.com"
-                    className="hover:underline"
+                    className="transition-all hover:font-bold"
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -81,32 +87,46 @@ const Footer = () => {
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold uppercase dark:text-white">
                 Legal
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className=" dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                  <a href="/privacy-policy" className="hover:underline">
+                  <a
+                    href="/privacy-policy"
+                    className="transition-all hover:font-bold"
+                  >
                     Privacy Policy
                   </a>
                 </li>
                 <li className="mb-4">
-                  <a href="/license" className="hover:underline">
+                  <a href="/license" className="transition-all hover:font-bold">
                     Licensing
                   </a>
                 </li>
                 <li className="mb-4">
-                  <a href="/terms-conditions" className="hover:underline">
+                  <a
+                    href="/copyright"
+                    className="transition-all hover:font-bold"
+                  >
+                    Copyright
+                  </a>
+                </li>
+                <li className="mb-4">
+                  <a
+                    href="/terms-conditions"
+                    className="transition-all hover:font-bold"
+                  >
                     Terms &amp; Conditions
                   </a>
                 </li>
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold  uppercase dark:text-white">
                 Contact Us
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className=" dark:text-gray-400 font-medium">
                 <li className="mb-4">
                   <a
                     href="mailto:mrmezan06@gmail.com"
@@ -146,8 +166,8 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div className="px-4 py-6 bg-gray-100 dark:bg-gray-700 md:flex md:items-center md:justify-between">
-            <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center">
+          <div className="px-4 py-6 select-none  dark:bg-gray-700 md:flex md:items-center md:justify-between">
+            <span className="text-sm  dark:text-gray-300 sm:text-center">
               © {new Date().getFullYear()}{' '}
               <a href="https://novel-anime.netlify.app">Novel</a>. All Rights
               Reserved.
@@ -157,7 +177,7 @@ const Footer = () => {
                 href="https://www.facebook.com/mejanur.mezan.3"
                 target="_blank"
                 rel="noreferrer"
-                className="text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                className=" hover:text-gray-900 dark:hover:text-white"
               >
                 <svg
                   className="w-4 h-4"
@@ -178,7 +198,7 @@ const Footer = () => {
                 href="https://discordapp.com/users/108888888888888888"
                 target="_blank"
                 rel="noreferrer"
-                className="text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                className=" hover:text-gray-900 dark:hover:text-white"
               >
                 <svg
                   className="w-4 h-4"
@@ -195,7 +215,7 @@ const Footer = () => {
                 href="https://www.twitter.com/MejanurMezan"
                 target="_blank"
                 rel="noreferrer"
-                className="text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                className=" hover:text-gray-900 dark:hover:text-white"
               >
                 <svg
                   className="w-4 h-4"
@@ -216,7 +236,7 @@ const Footer = () => {
                 href="https://www.github.com/mrmezan06"
                 target="_blank"
                 rel="noreferrer"
-                className="text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                className=" hover:text-gray-900 dark:hover:text-white"
               >
                 <svg
                   className="w-4 h-4"
