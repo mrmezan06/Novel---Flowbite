@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.post('/register', registerUser);
 router.post('/login', loginUser);
-router.get('/logout', checkAuth, logoutUser);
+router.get('/logout', logoutUser);
 
 // Test CheckAuth && CheckRole
 

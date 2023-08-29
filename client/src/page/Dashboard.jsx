@@ -45,11 +45,16 @@ const Dashboard = () => {
         <>
           <>
             <div className="flex flex-col justify-center mt-10">
-              <img
-                className="w-20 h-20 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
-                src={user?.imageUrl}
-                alt="Bordered avatar"
-              />
+              {user && (
+                <>
+                  {' '}
+                  <img
+                    className="w-20 h-20 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+                    src={user?.imageUrl}
+                    alt="Bordered avatar"
+                  />
+                </>
+              )}
             </div>
             <div className="flex flex-col justify-center mt-5 mb-10">
               <h1 className="text-2xl font-bold text-gray-900 dark:text-white">

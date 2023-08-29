@@ -110,29 +110,6 @@ const loginUser = async (req, res) => {
 // @route   POST /api/user/logout
 // @access  Private
 const logoutUser = async (req, res) => {
-  
-  const user = await User.findById(req.user.userId);
-  // console.log(req.user);
-
-  if (!user) {
-    return res.status(200).json({
-      success: true,
-      message: 'User does not exist!',
-    });
-  }
-
-  const updatedUser = await User.findByIdAndUpdate(req.user.userId, {
-    accessToken: null,
-  });
-
-  if (!updatedUser) {
-    return res.status(400).json({
-      success: false,
-      message: 'Something went wrong!',
-    });
-  }
-
-
 
   res.status(200).json({
     success: true,

@@ -52,14 +52,9 @@ export const logout = () => async (dispatch) => {
     });
   }
 
-  const accessToken = user?.accessToken;
-  const config = {
-    headers: {
-      authorization: accessToken,
-    },
-  };
 
-  await axios.get(`${BASE_URL}/api/user/logout`, config);
+
+  await axios.get(`${BASE_URL}/api/user/logout`);
   dispatch({
     type: LOGOUT_SUCCESS,
   });
