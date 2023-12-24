@@ -21,6 +21,16 @@ const createChapter = async (req, res) => {
         .json({ success: false, message: 'Please fill all required fields!' });
     }
 
+    // check if chapter already exist
+
+    const chapterExist = await Chapter.findOne({ novelId, chapter });
+    if (chapterExist) {
+      return res.status(400).json({
+        success: false,
+        message: `Chapter ${chapter} already exist!`,
+      });
+    }
+
     const newChapter = new Chapter({
       novelId,
       chapter,
