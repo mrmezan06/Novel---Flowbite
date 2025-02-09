@@ -1,4 +1,4 @@
-# Novel Dong Hua
+# Novel Dong Hua Chinese
 
 
 ### Home Page
